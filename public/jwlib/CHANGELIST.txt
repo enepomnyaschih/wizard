@@ -1,0 +1,54 @@
+0.3 (alpha)
+
+Changes that require your code updating:
+
+1.  Renamed JS list from "lib" to "jwlib".
+2.  Excluded next extras to separate repository:
+        JW.Color
+        JW.Dimap & JW.DimapSyncher
+        MD5 & JW.smartEncode & JW.hash & JW.uid
+        JW.Url
+    Visit https://github.com/enepomnyaschih/jwlib-extras/wiki for details.
+3.  Excluded JSON namespace from jWidget Lib build. You should attach it to the
+    page separately: "thirdparty/json.js|auto"
+4.  Made Array, Function and String prototypes overriding optional. If refused,
+    utility functions are available in JW.Array, JW.Function and JW.String
+    namespaces, and JW(x) flyweight is available. This allows jWidget Lib to
+    run in "safe" mode (all stuff is placed in "JW" namespace). If you use
+    jWidget SDK, you should attach "jwlib" JS list to get prototypes
+    extended, and "jwlib-safe" JS list to refuse prototypes extension.
+5.  Moved all static methods of Array, Function and String to JW.Array,
+    JW.Function and JW.String namespaces.
+6.  Removed JW.defer and Function.prototype.defer since this function doesn't
+    provide any benefit opposing to standard setTimeout.
+7.  Renamed Array methods:
+    removeItems -> removeItem
+    insertItem  -> insertItemAt
+    removeItem  -> removeItemAt
+8.  JW.Function.returns has new specification.
+    Old: JW.Function.returns(value:*):Function
+    New: JW.Function.returns(target:Function, value:*):Function
+    "target" argument determines the function to run before returning the
+    value, can be null or undefined.
+9.  JW.Function.returnsArg has new specification.
+    Old: JW.Function.returnsArg(index:Integer):Function
+    New: JW.Function.returnsArg(target:Function, index:Integer):Function
+    "target" argument determines the function to run before returning the
+    value, can be null or undefined.
+10. Removed "console" global object initiation in console-less browsers.
+11. Removed Date class extension for better times (found many bugs and
+    inconsistencies).
+12. Removed timezones extension (requires Date extension which is removed).
+
+New features:
+
+1.  New delegates:
+        JW.enscope, JW.Function.enscope, Function.prototype.enscope
+        JW.descope, JW.Function.descope, Function.prototype.descope
+2.  Flyweight JW(x) which extends passed Array, Function or String with methods
+    (useful in "safe" mode, when direct prototypes extension is refused).
+3.  JW.ns support multi-argument and array-argument now.
+4.  NodeJS support.
+5.  JW.global refers to environment's global namespace (window in browser, or
+    global in NodeJS).
+6.  JW.forEach alias for JW.each, JavaScript 1.6 compatible.
