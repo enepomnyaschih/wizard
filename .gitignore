@@ -1,0 +1,6 @@
+/debug.bat
+/release.bat
+/*.log
+/jwidget/temp
+/public/build
+/public/pages
