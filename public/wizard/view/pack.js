@@ -14,7 +14,7 @@
 		this.newPackEl.click(JW.Function.inScope(this._onNewPackClick, this));
 		this.newClassEl.click(JW.Function.inScope(this._onNewClassClick, this));
 		this.deleteEl.click(JW.Function.inScope(this._onDeleteClick, this));
-		
+		/*
 		this.namePicker = new wizard.view.picker.Name({
 			validator      : this._validateName,
 			applier        : this._applyName,
@@ -31,7 +31,19 @@
 				renderParent   : this,
 				renderPosition : "parent"
 			});
-		}
+		}*/
+	},
+	
+	_onNewPackClick: function() {
+		this.model.selectModule(this.module.newPack());
+	},
+	
+	_onNewClassClick: function() {
+		this.model.selectModule(this.module.newClass());
+	},
+	
+	_onDeleteClick: function() {
+		this.module.remove();
 	},
 	
 	_validateName: function(name) {

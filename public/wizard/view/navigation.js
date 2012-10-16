@@ -16,6 +16,20 @@
 			renderParent   : this,
 			renderPosition : "root"
 		});
+	},
+	
+	expandBranch: function(pack) {
+		if (!pack) {
+			return;
+		}
+		if (!pack.parent) {
+			this.rootPack.setExpanded(true);
+			return this.rootPack;
+		}
+		var parentPackView = this.expandBranch(pack.parent);
+		var packView = parentPackView.body.packs.getByPack(pack);
+		packView.setExpanded(true);
+		return packView;
 	}
 });
 

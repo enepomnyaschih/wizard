@@ -11,8 +11,6 @@
 		"wizard/comp/writer.js",
 		"wizard/model.js",
 		"wizard/model/module.js",
-		"wizard/model/module/class.js",
-		"wizard/model/module/pack.js",
 		"wizard/model/class.js",
 		"wizard/model/class/constructor.js",
 		"wizard/model/class/field.js",

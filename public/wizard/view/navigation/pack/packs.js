@@ -8,10 +8,10 @@
 	JW.UI.Syncher syncher
 	*/
 	
-	_renderBody: function() {
+	render: function() {
 		this._super();
 		
-		this.syncher = new JW.Syncher({
+		this.syncher = new JW.UI.Syncher({
 			collection : this.pack.packs,
 			provider   : wizard.view.navigation.Pack,
 			scope      : this,
@@ -26,5 +26,9 @@
 	destroyComponent: function() {
 		this.syncher.destroy();
 		this._super();
+	},
+	
+	getByPack: function(pack) {
+		return JW.searchBy(this.plainChildren, "module", pack);
 	}
 });

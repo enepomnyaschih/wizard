@@ -17,12 +17,17 @@
 			renderPosition : "navigation"
 		});
 		
-		//this._updateModule();
-		//this.model.bind("moduleselect", this._updateModule, this);
+		this._updateModule();
+		this.model.bind("moduleselect", this._updateModule, this);
 	},
 	
-	_updateModule: function()
-	{
+	destroyComponent: function() {
+		this.model.purge(this);
+		
+		this._super();
+	},
+	
+	_updateModule: function() {
 		if (!this.module && !this.model.selectedModule) {
 			return;
 		}
@@ -31,12 +36,14 @@
 		}
 		if (this.module) {
 			this.restoreElement("module");
+			this.moduleEl.addClass("left");
 			this.module.destroy();
 			delete this.module;
 		}
 		if (this.model.selectedModule) {
-			this.module = this.model.selectedModule.createModuleView();
+			this.module = this.model.selectedModule.createModuleView(model);
 			this.addChild(this.module, "module");
+			this.navigation.expandBranch(this.model.selectedModule.parent);
 		}
 	}
 });

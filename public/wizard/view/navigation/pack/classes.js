@@ -8,10 +8,10 @@
 	JW.UI.Syncher syncher
 	*/
 	
-	_renderBody: function() {
+	render: function() {
 		this._super();
 		
-		this.syncher = new JW.Syncher({
+		this.syncher = new JW.UI.Syncher({
 			collection : this.pack.classes,
 			provider   : wizard.view.navigation.Class,
 			scope      : this,

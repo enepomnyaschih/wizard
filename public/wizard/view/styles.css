@@ -1,4 +1,14 @@
-﻿.wizard
+﻿.clear
+{
+	clear: both;
+}
+
+.left
+{
+	float: left;
+}
+
+.wizard
 {
 	cursor: default;
 	font-family: sans-serif;
@@ -13,13 +23,11 @@
 	-webkit-box-sizing: border-box;
 }
 
-.clear
+.wizard-module
 {
-	clear: both;
-}
-
-.left
-{
-	float: left;
+	border: 1px solid black;
+	height: 600px;
+	margin-left: 10px;
+	width: 600px;
 }
 

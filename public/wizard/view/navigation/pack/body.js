@@ -9,7 +9,7 @@
 	wizard.view.navigation.pack.Classes classes
 	*/
 	
-	_renderBody: function() {
+	render: function() {
 		this._super();
 		
 		this.packs = new wizard.view.navigation.pack.Packs({
