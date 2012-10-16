@@ -1,0 +1,25 @@
+﻿.wizard
+{
+	cursor: default;
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+
+.wizard,
+.wizard div
+{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.left
+{
+	float: left;
+}
+

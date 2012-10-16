@@ -1,0 +1,42 @@
+﻿.wizard-navigation
+{
+	border: 1px solid black;
+	height: 600px;
+	overflow: auto;
+	width: 200px;
+}
+
+.wizard-navigation-module-row
+{
+	background: transparent none no-repeat 0 0; 
+	height: 16px;
+	padding-left: 16px;
+	white-space: nowrap;
+}
+
+.wizard-navigation-module-row.wizard-selected
+{
+	background-color: #3879D9;
+	color: white;
+}
+
+.wizard-navigation-module-row[wizardmodule=class]
+{
+	background-image: url(images/document.png);
+}
+
+.wizard-navigation-module-row[wizardmodule=pack]
+{
+	background-image: url(images/folder-collapsed.png);
+}
+
+.wizard-navigation-module-row.wizard-expanded[wizardmodule=pack]
+{
+	background-image: url(images/folder-expanded.png);
+}
+
+.wizard-navigation-module-row.wizard-empty[wizardmodule=pack]
+{
+	background-image: url(images/folder-empty.png);
+}
+

@@ -33,6 +33,8 @@ JW.Collection = JW.Observable.extend({
     // reorder(event:JW.Event)
     // filter(event:JW.Event)
     // reset(event:JW.Event)
+    // change(event:JW.Event)
+    // lengthchange(event:JW.Event)
     
     base: null, // [readonly] Array
     
@@ -77,6 +79,8 @@ JW.Collection = JW.Observable.extend({
         item = this._createItem(item);
         this.base.splice(index, 0, item);
         this.trigger("add", index, item);
+        this.trigger("change");
+        this.trigger("lengthchange");
         return item;
     },
     
@@ -96,6 +100,8 @@ JW.Collection = JW.Observable.extend({
         var item = this.base[index];
         this.base.splice(index, 1);
         this.trigger("remove", index, item);
+        this.trigger("change");
+        this.trigger("lengthchange");
         this._destroyItem(item);
         return item;
     },
@@ -108,6 +114,7 @@ JW.Collection = JW.Observable.extend({
         item = this._createItem(item);
         this.base[index] = item;
         this.trigger("replace", index, oldItem, item);
+        this.trigger("change");
         this._destroyItem(oldItem);
         return item;
     },
@@ -120,29 +127,40 @@ JW.Collection = JW.Observable.extend({
         this.base.splice(fromIndex, 1);
         this.base.splice(toIndex, 0, item);
         this.trigger("move", fromIndex, toIndex, item);
+        this.trigger("change");
         return item;
     },
     
     clear: function()
     {
+        if (this.isEmpty()) {
+            return;
+        }
         this.each(this._destroyItem, this);
         this.base.splice(0, this.base.length);
         this.trigger("clear");
+        this.trigger("change");
+        this.trigger("lengthchange");
     },
     
     triggerReorder: function()
     {
         this.trigger("reorder");
+        this.trigger("change");
     },
     
     triggerFilter: function()
     {
         this.trigger("filter");
+        this.trigger("change");
+        this.trigger("lengthchange");
     },
     
     triggerReset: function()
     {
         this.trigger("reset");
+        this.trigger("change");
+        this.trigger("lengthchange");
     },
     
     every: function(
