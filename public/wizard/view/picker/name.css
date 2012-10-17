@@ -1,0 +1,17 @@
+﻿.wizard-picker-name
+{
+	border: 1px black solid;
+	display: inline-block;
+	height: 18px;
+}
+
+.wizard-picker-name-input
+{
+	border: none;
+	font-family: monospace;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: top;
+}
+

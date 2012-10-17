@@ -4,3 +4,5 @@
 	void focus();
 	*/
 });
+
+wizard.view.picker = {};

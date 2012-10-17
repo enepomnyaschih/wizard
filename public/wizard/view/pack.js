@@ -14,33 +14,37 @@
 		this.newPackEl.click(JW.Function.inScope(this._onNewPackClick, this));
 		this.newClassEl.click(JW.Function.inScope(this._onNewClassClick, this));
 		this.deleteEl.click(JW.Function.inScope(this._onDeleteClick, this));
-		/*
-		this.namePicker = new wizard.view.picker.Name({
-			validator      : this._validateName,
-			applier        : this._applyName,
-			value          : this.module.name,
-			renderParent   : this,
-			renderPosition : "name"
-		});
 		
 		if (this.module.isRoot()) {
+			this.removeEl("name-field");
 			this.removeEl("parent-field");
+			return;
 		}
-		else {
-			this.parentPicker = new wizard.view.picker.Pack({
-				model          : this.model,
-				renderParent   : this,
-				renderPosition : "parent"
-			});
-		}*/
+		
+		this.namePicker = new wizard.view.picker.Name({
+			validator      : JW.Function.inScope(this._validateName, this),
+			applier        : JW.Function.inScope(this._applyName, this),
+			value          : this.module.name,
+			renderParent   : this,
+			renderPosition : "name-picker"
+		});
+		/*
+		this.parentPicker = new wizard.view.picker.Pack({
+			model          : this.model,
+			renderParent   : this,
+			renderPosition : "parent-picker"
+		});
+		*/
 	},
-	/*
+	
 	afterAppend: function() {
 		this._super();
 		
-		this.namePicker.focus();
+		if (this.namePicker) {
+			this.namePicker.focus();
+		}
 	},
-	*/
+	
 	_onNewPackClick: function() {
 		this.model.selectModule(this.module.newPack());
 	},

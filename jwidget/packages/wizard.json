@@ -34,6 +34,7 @@
 		"wizard/model/vartype/generictype.js",
 		"wizard/view.js",
 		"wizard/view/main.jw.html : wizard.View",
+		"wizard/view/styles.css",
 		"wizard/view/module.js",
 		"wizard/view/navigation.js",
 		"wizard/view/navigation/main.jw.html : wizard.view.Navigation",
@@ -48,7 +49,11 @@
 		"wizard/view/navigation/pack/packs.js",
 		"wizard/view/pack.js",
 		"wizard/view/pack.jw.html : wizard.view.Pack",
-		"wizard/view/styles.css",
+		"wizard/view/picker.js",
+		"wizard/view/picker/styles.css",
+		"wizard/view/picker/name.js",
+		"wizard/view/picker/name.jw.html : wizard.view.picker.Name",
+		"wizard/view/picker/name.css",
 		"wizard/boot.js"
 	]
 }
