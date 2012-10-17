@@ -1,6 +1,8 @@
 ﻿wizard.model.Module = JW.ObservableConfig.extend({
 	/*
-	Fields
+	Required options
+	String name;
+	wizard.model.Pack parent;
 	wizard.model.module.Kind moduleKind;
 	
 	Abstract methods

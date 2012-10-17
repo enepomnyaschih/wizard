@@ -5,8 +5,6 @@
 wizard.model.Pack = wizard.model.Module.extend({
 	/*
 	Fields
-	name    : String
-	parent  : wizard.model.Pack
 	packs   : wizard.model.pack.Packs
 	classes : JW.Collection<wizard.model.Class>
 	*/
@@ -16,7 +14,7 @@ wizard.model.Pack = wizard.model.Module.extend({
 	init: function(config) {
 		this._super(config);
 		this.packs = new wizard.model.pack.Packs();
-		this.classes = new JW.Collection();
+		this.classes = new wizard.model.pack.Classes();
 	},
 	
 	getFullName: function() {
@@ -47,13 +45,25 @@ wizard.model.Pack = wizard.model.Module.extend({
 		});
 		this.packs.addItem(pack);
 		return pack;
+	},
+	
+	newClass: function() {
+		var clazz = new wizard.model.Class({
+			name   : this.classes.generateName(),
+			parent : this
+		});
+		this.classes.addItem(clazz);
+		return clazz;
 	}
 });
 
 wizard.model.pack = {};
 
-wizard.model.pack.Packs = JW.Collection.extend({
-	_defaultName : "newpackage",
+wizard.model.pack.Modules = JW.Collection.extend({
+	/*
+	Required options
+	String _defaultName;
+	*/
 	
 	getByName: function(name) {
 		return this.searchBy("name", name);
@@ -69,6 +79,15 @@ wizard.model.pack.Packs = JW.Collection.extend({
 			if (!this.getByName(name)) {
 				return name;
 			}
+            ++index;
 		}
 	}
+});
+
+wizard.model.pack.Packs = wizard.model.pack.Modules.extend({
+	_defaultName : "newpackage"
+});
+
+wizard.model.pack.Classes = wizard.model.pack.Modules.extend({
+	_defaultName : "NewClass"
 });

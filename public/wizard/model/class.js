@@ -6,8 +6,6 @@ wizard.model.Class = wizard.model.Module.extend({
 	/*
 	Fields
 	classKind : wizard.model.clazz.Kind
-	name      : String
-	pack      : wizard.model.Pack
 	*/
 	
 	moduleKind : wizard.model.module.Kind["class"],
@@ -17,8 +15,8 @@ wizard.model.Class = wizard.model.Module.extend({
 	},
 	
 	getFullName: function() {
-		return !this.pack.parent ? this.name :
-		       (this.pack.getFullName() + "." + this.name);
+		return !this.parent.parent ? this.name :
+		       (this.parent.getFullName() + "." + this.name);
 	},
 	
 	createModuleView: function(model) {
