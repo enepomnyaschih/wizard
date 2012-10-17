@@ -18,6 +18,7 @@
 		this.namePicker = new wizard.view.picker.Name({
 			validator      : this._validateName,
 			applier        : this._applyName,
+			value          : this.module.name,
 			renderParent   : this,
 			renderPosition : "name"
 		});
@@ -33,7 +34,13 @@
 			});
 		}*/
 	},
-	
+	/*
+	afterAppend: function() {
+		this._super();
+		
+		this.namePicker.focus();
+	},
+	*/
 	_onNewPackClick: function() {
 		this.model.selectModule(this.module.newPack());
 	},
