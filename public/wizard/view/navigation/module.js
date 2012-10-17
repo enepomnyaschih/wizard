@@ -14,9 +14,11 @@
 		var Module = wizard.view.navigation.Module;
 		
 		this.rowEl.attr("wizardmodule", this.module.moduleKind.id);
-		this.rowEl.text(this._getLabel());
 		
 		this._renderBody();
+		
+		this._updateName();
+		this.module.bind("namechange", this._updateName, this);
 		
 		this._updateSelected();
 		this.module.bind("selectedchange", this._updateSelected, this);
@@ -32,6 +34,10 @@
 	
 	_renderBody: function() {
 		this.removeEl("body");
+	},
+	
+	_updateName: function() {
+		this.rowEl.text(this._getLabel());
 	},
 	
 	_updateSelected: function() {

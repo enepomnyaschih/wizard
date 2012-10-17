@@ -28,6 +28,8 @@
 			renderParent   : this,
 			renderPosition : "name-picker"
 		});
+		
+		this.el.find(".label").css("width", "100px");
 		/*
 		this.parentPicker = new wizard.view.picker.Pack({
 			model          : this.model,

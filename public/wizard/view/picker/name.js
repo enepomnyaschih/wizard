@@ -35,10 +35,12 @@
 		this.inputEl.focus();
 	},
 	
-	submit: function() {
-		if (!this._changeTimer) {
+	commit: function() {
+		if (!this._changeTimer || !this._valid) {
 			return;
 		}
+		this.value = this._editValue;
+		this.applier(this.value);
 		this._endEdit();
 	},
 	
@@ -46,6 +48,7 @@
 		if (!this._changeTimer) {
 			return;
 		}
+		this.inputEl.val(this._initialValue);
 		this._endEdit();
 	},
 	
@@ -54,12 +57,16 @@
 	},
 	
 	_onBlur: function() {
-		this.submit();
+		if (this._valid) {
+			this.commit();
+		} else {
+			this.revert();
+		}
 	},
 	
 	_onKeyDown: function(event) {
 		switch (event.which) {
-			case 13: this.submit(); break;
+			case 13: this.commit(); break;
 			case 27: this.revert(); break;
 			default: this._testChange();
 		}

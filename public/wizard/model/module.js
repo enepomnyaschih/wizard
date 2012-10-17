@@ -1,7 +1,6 @@
 ﻿wizard.model.Module = JW.ObservableConfig.extend({
 	/*
 	Required options
-	String name;
 	wizard.model.Pack parent;
 	wizard.model.module.Kind moduleKind;
 	
@@ -10,6 +9,7 @@
 	*/
 });
 
+wizard.Util.addProperty(wizard.model.Module, String, "name", "");
 wizard.Util.addProperty(wizard.model.Module, Boolean, "selected", false);
 
 wizard.model.module = {};
