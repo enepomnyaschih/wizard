@@ -36,6 +36,7 @@
 		"wizard/view/main.jw.html : wizard.View",
 		"wizard/view/styles.css",
 		"wizard/view/module.js",
+		"wizard/view/class.js",
 		"wizard/view/navigation.js",
 		"wizard/view/navigation/main.jw.html : wizard.view.Navigation",
 		"wizard/view/navigation/styles.css",

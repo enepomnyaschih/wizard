@@ -61,6 +61,11 @@
 	
 	_updateEmpty: function() {
 		this.rowEl.toggleClass("wizard-empty", this.module.isEmpty());
+	},
+	
+	_updateName: function() {
+		this._super();
+		JW.eachByMethod(this.body.packs.plainChildren, "_updateName");
 	}
 });
 

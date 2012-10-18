@@ -9,4 +9,4 @@
 	}
 });
 
-wizard.view.Pack.nameRegex = /^[A-Z][A-Za-z0-9]*$/;
+wizard.view.Class.nameRegex = /^[A-Z][A-Za-z0-9]*$/;
