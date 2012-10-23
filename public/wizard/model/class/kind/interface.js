@@ -1,4 +1,4 @@
-﻿wizard.model.clazz.Kind["interface"] = new wizard.model.clazz.Kind({
+﻿wizard.model.clazz.Kind.items["interface"] = new wizard.model.clazz.Kind({
 	id                 : "interface",
 	name               : "interface",
 	extendable         : true,
@@ -11,16 +11,16 @@
 wizard.model.clazz.Interface = wizard.model.Class.extend({
 	/*
 	Fields
-	genericTypes  : JW.Collection<wizard.model.clazz.GenericType>
-	implementz    : JW.Collection<wizard.model.clazz.Interface>
-	methods       : JW.Collection<wizard.model.clazz.Method>
+	genericClasses : JW.Collection<wizard.model.clazz.GenericClass>
+	implementz     : JW.Collection<wizard.model.clazz.Interface>
+	methods        : JW.Collection<wizard.model.clazz.Method>
 	*/
 	
-	classKind : wizard.model.clazz.Kind["interface"],
+	classKind : wizard.model.clazz.Kind.items["interface"],
 	
 	init: function(config) {
 		this._super(config);
-		this.genericTypes = new JW.Collection();
+		this.genericClasses = new JW.Collection();
 		this.implementz = new JW.Collection();
 		this.methods = new JW.Collection();
 	}

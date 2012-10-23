@@ -1,4 +1,4 @@
-﻿wizard.model.clazz.Kind["static"] = new wizard.model.clazz.Kind({
+﻿wizard.model.clazz.Kind.items["static"] = new wizard.model.clazz.Kind({
 	id                 : "static",
 	name               : "static class",
 	extendable         : false,
@@ -15,7 +15,7 @@ wizard.model.clazz.Static = wizard.model.Class.extend({
 	staticMethods : JW.Collection<wizard.model.clazz.StaticMethod>
 	*/
 	
-	classKind : wizard.model.clazz.Kind["static"],
+	classKind : wizard.model.clazz.Kind.items["static"],
 	
 	init: function(config) {
 		this._super(config);

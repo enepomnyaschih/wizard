@@ -1,4 +1,4 @@
-﻿wizard.model.clazz.GenericType = JW.ObservableConfig.extend({
+﻿wizard.model.clazz.GenericClass = JW.ObservableConfig.extend({
 	/*
 	Fields
 	clazz   : wizard.model.Class
