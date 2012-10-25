@@ -3,8 +3,10 @@
 	Required
 	wizard.Model model;
 	
+	Optional
+	boolean selected;
+	
 	Abstract methods
 	String _getLabel();
-	wizard.view.editor.Form _createForm();
 	*/
 });

@@ -6,7 +6,7 @@ wizard.model.Pack = wizard.model.Module.extend({
 	/*
 	Fields
 	packs   : wizard.model.pack.Packs
-	classes : JW.Collection<wizard.model.Class>
+	classes : wizard.model.pack.Classes
 	*/
 	
 	moduleKind : wizard.model.module.Kind["pack"],
@@ -52,8 +52,11 @@ wizard.model.Pack = wizard.model.Module.extend({
 			name   : this.classes.generateName(),
 			parent : this
 		});
-		this.classes.addItem(clazz);
-		return clazz;
+		var wrapper = new wizard.model.Wrapper({
+			instance : clazz
+		});
+		this.classes.addItem(wrapper);
+		return wrapper;
 	}
 });
 
@@ -63,11 +66,10 @@ wizard.model.pack.Modules = JW.Collection.extend({
 	/*
 	Required options
 	String _defaultName;
-	*/
 	
-	getByName: function(name) {
-		return this.searchBy("name", name);
-	},
+	Abstract methods
+	T getByName(String name);
+	*/
 	
 	generateName: function() {
 		if (!this.getByName(this._defaultName)) {
@@ -85,9 +87,17 @@ wizard.model.pack.Modules = JW.Collection.extend({
 });
 
 wizard.model.pack.Packs = wizard.model.pack.Modules.extend({
-	_defaultName : "newpackage"
+	_defaultName : "newpackage",
+	
+	getByName: function(name) {
+		return this.searchBy("name", name);
+	}
 });
 
 wizard.model.pack.Classes = wizard.model.pack.Modules.extend({
-	_defaultName : "NewClass"
+	_defaultName : "NewClass",
+	
+	getByName: function(name) {
+		return this.searchBy("instance.name", name);
+	}
 });

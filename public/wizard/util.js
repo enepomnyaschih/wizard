@@ -5,7 +5,9 @@ wizard.Util.createProperty = function(type, name, initialValue) {
 	var proto = {};
 	proto[name] = initialValue;
 	proto["set" + capName] = function(value) {
-		value = type(value);
+		if (type) {
+			value = type(value);
+		}
 		if (this[name] === value) {
 			return;
 		}
