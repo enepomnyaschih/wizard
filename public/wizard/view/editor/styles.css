@@ -4,3 +4,9 @@
 .wizard-editor-line-body {
 	padding-left: 10px;
 }
+.wizard-editor-element {
+	display: inline-block;
+}
+.wizard-editor-form {
+	display: inline-block;
+}

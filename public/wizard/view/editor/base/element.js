@@ -15,6 +15,7 @@
 	
 	render: function() {
 		this._super();
+		this.el.addClass("wizard-editor-element");
 		this._initForm();
 		this.form = this._createForm();
 		this.addChild(this.form);

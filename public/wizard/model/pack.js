@@ -52,11 +52,8 @@ wizard.model.Pack = wizard.model.Module.extend({
 			name   : this.classes.generateName(),
 			parent : this
 		});
-		var wrapper = new wizard.model.Wrapper({
-			instance : clazz
-		});
-		this.classes.addItem(wrapper);
-		return wrapper;
+		this.classes.addItem(clazz);
+		return clazz;
 	}
 });
 

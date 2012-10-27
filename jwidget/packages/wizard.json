@@ -7,6 +7,10 @@
 	"resources" : [
 		"wizard.js",
 		"wizard/util.js",
+		"wizard/lib.js",
+		"wizard/lib/collectionsyncher.js",
+		"wizard/lib/componentsyncher.js",
+		"wizard/lib/synchedcomponent.js",
 		"wizard/comp.js",
 		"wizard/comp/writer.js",
 		"wizard/model.js",
