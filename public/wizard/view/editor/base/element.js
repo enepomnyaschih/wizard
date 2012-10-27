@@ -6,6 +6,9 @@
 	Required
 	wizard.Model model;
 	
+	Optional
+	wizard.view.editor.Element parent;
+	
 	Fields
 	wizard.view.editor.Form form;
 	
@@ -20,6 +23,7 @@
 		this.form = this._createForm();
 		this.addChild(this.form);
 		this.validate();
+		this.el.click(JW.Function.inScope(this._onClick, this));
 	},
 	
 	destroyComponent: function() {
@@ -57,5 +61,27 @@
 		}
 		this.form.destroy();
 		delete this.form;
+	},
+	
+	_updateExpanded: function() {
+		this.el.toggleClass("wizard-collapsed", !this.expanded);
+	},
+	
+	_onClick: function(event) {
+		event.stopPropagation();
+		if (this.focused) {
+			this.setExpanded(true);
+			if (this.form) {
+				var firstChild = this.form.elements.getItemAt(0);
+				if (firstChild) {
+					this.editor.focusManager.focus(firstChild);
+				}
+			}
+		} else {
+			this.editor.focusManager.focusRoot(this);
+		}
 	}
 });
+
+wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "expanded", false);
+wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "focused", false);

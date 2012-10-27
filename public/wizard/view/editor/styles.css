@@ -7,6 +7,9 @@
 .wizard-editor-element {
 	display: inline-block;
 }
+.wizard-editor-element.wt-collapsed {
+	color: blue;
+}
 .wizard-editor-form {
 	display: inline-block;
 }
