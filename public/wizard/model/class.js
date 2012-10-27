@@ -5,7 +5,17 @@
 wizard.model.Class = wizard.model.Module.extend({
 	/*
 	Optional
-	wizard.model.clazz.Content content;
+	wizard.model.clazz.Kind classKind;
+	
+	Fields
+	JW.Collection<wizard.model.clazz.GenericClass> genericClasses;
+	wizard.model.Class extendz;
+	JW.Collection<wizard.model.clazz.Interface> implementz;
+	JW.Collection<wizard.model.clazz.StaticField> staticFields;
+	JW.Collection<wizard.model.clazz.Field> fields;
+	JW.Collection<wizard.model.clazz.Constructor> constructors;
+	JW.Collection<wizard.model.clazz.Method> methods;
+	JW.Collection<wizard.model.clazz.StaticMethod> staticMethods;
 	*/
 	
 	moduleKind : wizard.model.module.Kind["class"],
@@ -20,10 +30,14 @@ wizard.model.Class = wizard.model.Module.extend({
 			model  : model,
 			module : this
 		});
+	},
+	
+	_updateClassKind: function() {
+		
 	}
 });
 
-wizard.Util.addProperty(wizard.model.Class, null, "content", null);
+wizard.Util.addProperty(wizard.model.Class, null, "classKind", null);
 
 wizard.model.clazz = {};
 

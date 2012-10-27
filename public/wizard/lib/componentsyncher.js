@@ -1,4 +1,4 @@
-wizard.lib.ComponentInsertSyncher = JW.Syncher.extend({
+wizard.lib.ComponentSyncher = JW.Syncher.extend({
 	/*
 	Required
 	JW.UI.Component scope;

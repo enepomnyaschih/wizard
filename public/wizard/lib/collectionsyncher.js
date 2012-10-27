@@ -1,4 +1,4 @@
-﻿wizard.lib.ComponentCreateSyncher = JW.Syncher.extend({
+﻿wizard.lib.CollectionSyncher = JW.Syncher.extend({
 	/*
 	Required
 	JW.Collection<JW.UI.Component> target;

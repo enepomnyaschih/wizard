@@ -1,10 +1,9 @@
-﻿wizard.view.editor.MenuElementOption = JW.ObservableConfig.extend({
+﻿wizard.view.editor.MenuElementOption = JW.Config.extend({
 	/*
 	Required
-	wizard.Model model;
-	
-	Abstract methods
-	string _getLabel();
-	string _getValue();
+	string label;
+	string value;
+	function(wizard.view.editor.MenuElementOption option) applier;
+	Object scope;
 	*/
 });

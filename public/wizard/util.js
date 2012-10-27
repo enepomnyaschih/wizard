@@ -12,11 +12,11 @@ wizard.Util.createProperty = function(type, name, initialValue) {
 			return;
 		}
 		this[name] = value;
-		this.trigger(name + "change", value);
 		var func = this["_update" + capName];
 		if (func) {
 			func.call(this);
 		}
+		this.trigger(name.toLowerCase() + "change", value);
 	};
 	return proto;
 };

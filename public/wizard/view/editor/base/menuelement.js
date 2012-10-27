@@ -4,8 +4,4 @@
 	Array<wizard.view.editor.MenuElementOption> _createOptions();
 	string _getMenuValue();
 	*/
-	
-	_isValid: function() {
-		
-	}
 });

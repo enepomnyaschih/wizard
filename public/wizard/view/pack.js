@@ -61,7 +61,7 @@
 	
 	_validateName: function(name) {
 		if (!wizard.view.Pack.nameRegex.test(name)) {
-			return "Invalid package name. Must contain lowercase liters and numbers only, must start from liter.";
+			return "Invalid package name. Must contain lower case liters and numbers only, must start from liter.";
 		}
 		var isFree = this.module.parent.packs.every(function(sibling) {
 			return (sibling === this.module) || (sibling.name !== name);

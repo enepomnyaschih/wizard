@@ -2,8 +2,32 @@
 	/*
 	Required
 	wizard.model.Class clazz;
+	
+	Fields
+	wizard.lib.CollectionSyncher syncher;
 	*/
 	
-	isList : true,
-	title  : "generic classes"
+	title : "generic classes",
+	
+	render: function() {
+		this._super();
+		
+		this.listItems = new JW.Collection();
+		/*
+		this.syncher = new wizard.lib.CollectionSyncher({
+			collection : this.clazz.genericClasses,
+			provider   : wizard.view.editor.GenericClassDefinitionElement,
+			dataField  : "genericClass",
+			
+			extraCfg : {
+				model : this.model,
+				clazz : this.clazz
+			}
+		});*/
+	},
+	
+	// override
+	_onAddClick: function() {
+		this.clazz.genericClasses.addItem(new wizard.model.clazz.GenericClass());
+	}
 });

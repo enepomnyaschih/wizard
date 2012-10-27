@@ -4,7 +4,7 @@
 	JW.Collection<JW.UI.Component> collection;
 	
 	Fields
-	wizard.lib.ComponentInsertSyncher syncher;
+	wizard.lib.ComponentSyncher syncher;
 	*/
 	
 	render: function() {
@@ -27,7 +27,7 @@
 		if (!this.collection) {
 			return;
 		}
-		this.syncher = new wizard.lib.ComponentInsertSyncher({
+		this.syncher = new wizard.lib.ComponentSyncher({
 			collection : this.collection,
 			scope      : this
 		});

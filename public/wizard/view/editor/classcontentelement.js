@@ -6,7 +6,7 @@
 	
 	render: function() {
 		this._super();
-		this.clazz.bind("contentchange", this._updateForm, this);
+		this.clazz.bind("classkindchange", this._updateForm, this);
 	},
 	
 	destroyComponent: function() {
@@ -16,13 +16,21 @@
 	
 	// override
 	_createForm: function() {
-		if (!this.clazz.content) {
+		if (!this.clazz.classKind) {
 			return new wizard.view.editor.Form({
 				model : this.model,
-				title : "select class kind"
+				title : "(select)"
 			});
 		}
-		return this.clazz.content.createForm(this.model);
+		return new wizard.view.editor.ClassContentForm({
+			model : this.model,
+			clazz : this.clazz
+		});
+	},
+	
+	// override
+	_isValid: function() {
+		return JW.isSet(this.clazz.classKind);
 	},
 	
 	// override
@@ -30,16 +38,19 @@
 		return JW.map(JW.getValuesArray(wizard.model.clazz.Kind.items), this._createDropdownOption, this);
 	},
 	
-	_createDropdownOption: function(kind) {
-		return new wizard.view.editor.ClassElementOption({
-			model    : this.model,
-			clazz    : this.clazz,
-			kind     : kind,
-			selected : kind === this.clazz.classKind
-		});
+	// override
+	_getMenuValue: function() {
+		return this.clazz.classKind ? this.clazz.classKind.id : null;
 	},
 	
-	_updateForm: function() {
-		this.
+	_createDropdownOption: function(kind) {
+		var self = this;
+		return new wizard.view.editor.MenuElementOption({
+			label   : kind.name,
+			value   : kind.id,
+			applier : function() {
+				self.clazz.setClassKind(kind);
+			}
+		});
 	}
 });

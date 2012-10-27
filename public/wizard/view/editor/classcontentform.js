@@ -1,39 +1,12 @@
-﻿wizard.view.editor.ClassForm = wizard.view.editor.Form.extend({
+﻿wizard.view.editor.ClassContentForm = wizard.view.editor.Form.extend({
 	/*
 	Required
 	wizard.model.Class clazz;
-	
-	Fields
-	wizard.view.editor.TextElement nameElement;
-	wizard.view.editor.PackElement packElement;
 	*/
 	
-	render: function() {
+	initComponent: function() {
+		this.title = this.clazz.classKind.name;
 		this._super();
-		
-		this.kindEl.text(this.clazz.kind.name);
-	},
-	
-	// override
-	_createElements: function() {
-		this.nameElement = new wizard.view.editor.TextElement({
-			model     : this.model,
-			validator : this._validateName,
-			applier   : this._applyName,
-			scope     : this
-		});
-		
-		this.packElement = new wizard.view.editor.PackElement({
-			model     : this.model,
-			validator : this._validatePack,
-			applier   : this._applyPack,
-			scope     : this
-		});
-		
-		return [
-			this.nameElement,
-			this.packElement
-		];
 	},
 	
 	// override
@@ -53,6 +26,9 @@
 		if (kind.implementz) {
 			children.push(new wizard.view.editor.ClassImplementsForm(config));
 		}
+		if (kind.hasStaticElements) {
+			children.push(new wizard.view.editor.ClassStaticFieldsForm(config));
+		}
 		if (kind.hasDynamicElements) {
 			children.push(new wizard.view.editor.ClassFieldsForm(config));
 		}
@@ -61,6 +37,9 @@
 		}
 		if (kind.hasMethods) {
 			children.push(new wizard.view.editor.ClassMethodsForm(config));
+		}
+		if (kind.hasStaticElements) {
+			children.push(new wizard.view.editor.ClassStaticMethodsForm(config));
 		}
 		return children;
 	}
