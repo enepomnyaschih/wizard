@@ -8,7 +8,7 @@
 });
 
 // implements Extendable, WithFields, WithMethods, WithStatic
-wizard.model.clazz.Regular = wizard.model.Class.extend({
+wizard.model.clazz.Regular = wizard.model.clazz.Content.extend({
 	/*
 	Fields
 	genericClasses : JW.Collection<wizard.model.clazz.GenericClass>
@@ -21,7 +21,7 @@ wizard.model.clazz.Regular = wizard.model.Class.extend({
 	staticMethods  : JW.Collection<wizard.model.clazz.StaticMethod>
 	*/
 	
-	classKind : wizard.model.clazz.Kind.items["regular"],
+	kind : wizard.model.clazz.Kind.items["regular"],
 	
 	init: function(config) {
 		this._super(config);
@@ -32,5 +32,12 @@ wizard.model.clazz.Regular = wizard.model.Class.extend({
 		this.methods = new JW.Collection();
 		this.staticFields = new JW.Collection();
 		this.staticMethods = new JW.Collection();
+	},
+	
+	createForm: function(model) {
+		return new wizard.view.editor.RegularClassForm({
+			model        : model,
+			classContent : this
+		});
 	}
 });

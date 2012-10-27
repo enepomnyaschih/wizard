@@ -1,10 +1,11 @@
 ﻿wizard.view.editor.MenuElement = wizard.view.editor.Element.extend({
 	/*
 	Abstract methods
-	Array<wizard.view.editor.MenuOption> _createOptions();
+	Array<wizard.view.editor.MenuElementOption> _createOptions();
+	string _getMenuValue();
 	*/
 	
-	render: function() {
+	_isValid: function() {
 		
 	}
 });

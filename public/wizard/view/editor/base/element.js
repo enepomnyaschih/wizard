@@ -15,15 +15,31 @@
 	
 	render: function() {
 		this._super();
-		
 		this._initForm();
 		this.form = this._createForm();
 		this.addChild(this.form);
+		this.validate();
+	},
+	
+	destroyComponent: function() {
+		this._doneForm();
+		this._super();
+	},
+	
+	validate: function() {
+		var isValid = this._isValid();
+		this.el.toggleClass("wizard-invalid", !isValid);
+		return isValid;
+	},
+	
+	_isValid: function() {
+		return true;
 	},
 	
 	_updateForm: function() {
 		this._doneForm();
 		this._initForm();
+		this.trigger("formchange", this.form);
 	},
 	
 	_initForm: function() {
@@ -34,5 +50,11 @@
 		this.addChild(this.form);
 	},
 	
-	_doneForm
+	_doneForm: function() {
+		if (!this.form) {
+			return;
+		}
+		this.form.destroy();
+		delete this.form;
+	}
 });

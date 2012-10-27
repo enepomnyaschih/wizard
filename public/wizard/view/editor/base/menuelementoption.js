@@ -3,10 +3,8 @@
 	Required
 	wizard.Model model;
 	
-	Optional
-	boolean selected;
-	
 	Abstract methods
-	String _getLabel();
+	string _getLabel();
+	string _getValue();
 	*/
 });

@@ -2,10 +2,10 @@
 	/*
 	Required
 	wizard.Model model;
-	boolean isList;
 	
 	Optional
-	String title;
+	boolean isList;
+	string title;
 	
 	Fields
 	Array<wizard.view.editor.Element> elements;
@@ -16,6 +16,8 @@
 	Array<wizard.view.editor.Element> _createElements();
 	Array<wizard.view.editor.Form> _createChildren();
 	*/
+	
+	isList : false,
 	
 	render: function() {
 		this._super();

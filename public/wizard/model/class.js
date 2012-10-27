@@ -4,15 +4,11 @@
 
 wizard.model.Class = wizard.model.Module.extend({
 	/*
-	Fields
-	classKind : wizard.model.clazz.Kind
+	Optional
+	wizard.model.clazz.Content content;
 	*/
 	
 	moduleKind : wizard.model.module.Kind["class"],
-	
-	init: function(config) {
-		this._super(config);
-	},
 	
 	getFullName: function() {
 		return !this.parent.parent ? this.name :
@@ -26,6 +22,8 @@ wizard.model.Class = wizard.model.Module.extend({
 		});
 	}
 });
+
+wizard.Util.addProperty(wizard.model.Class, null, "content", null);
 
 wizard.model.clazz = {};
 
