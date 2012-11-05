@@ -7,8 +7,12 @@
 .wizard-editor-element {
 	display: inline-block;
 }
-.wizard-editor-element.wt-collapsed {
+.wizard-editor-element.wizard-collapsed {
 	color: blue;
+	cursor: pointer;
+}
+.wizard-editor-element.wizard-invalid {
+	color: red;
 }
 .wizard-editor-form {
 	display: inline-block;
