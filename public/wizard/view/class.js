@@ -6,6 +6,7 @@
 	Fields
 	wizard.view.editor.ClassContentElement element;
 	wizard.view.editor.Line line;
+	wizard.view.Editor editor;
 	*/
 	
 	render: function() {
@@ -23,9 +24,14 @@
 		
 		this.el.find(".label").css("width", "100px");
 		
+		this.editor = new wizard.view.Editor({
+			model : this.model
+		});
+		
 		this.element = new wizard.view.editor.ClassContentElement({
-			model : this.model,
-			clazz : this.module
+			model  : this.model,
+			clazz  : this.module,
+			editor : this.editor
 		});
 		
 		this.line = new wizard.view.editor.Line({
@@ -33,6 +39,8 @@
 			renderParent   : this,
 			renderPosition : "line"
 		});
+		
+		this.editor.setRootElement(this.element);
 	},
 	
 	afterAppend: function() {

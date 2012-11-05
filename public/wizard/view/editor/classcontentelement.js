@@ -18,13 +18,13 @@
 	_createForm: function() {
 		if (!this.clazz.classKind) {
 			return new wizard.view.editor.Form({
-				model : this.model,
-				title : "(select)"
+				editor : this.editor,
+				title  : "(select)"
 			});
 		}
 		return new wizard.view.editor.ClassContentForm({
-			model : this.model,
-			clazz : this.clazz
+			editor : this.editor,
+			clazz  : this.clazz
 		});
 	},
 	

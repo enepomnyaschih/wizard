@@ -11,7 +11,7 @@
 	// override
 	_createElements: function() {
 		this.classElement = new wizard.view.editor.ClassElement({
-			model     : this.model,
+			editor    : this.editor,
 			validator : this._validateClass,
 			applier   : this._applyClass,
 			scope     : this

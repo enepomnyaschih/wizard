@@ -1,7 +1,7 @@
 ﻿wizard.view.editor.Form = JW.UI.Component.extend({
 	/*
 	Required
-	wizard.Model model;
+	wizard.view.Editor editor;
 	
 	Optional
 	string title;

@@ -14,8 +14,8 @@
 		var kind = this.clazz.kind;
 		var children = [];
 		var config = {
-			model : this.model,
-			clazz : this.clazz
+			editor : this.editor,
+			clazz  : this.clazz
 		};
 		if (kind.hasGenericClasses) {
 			children.push(new wizard.view.editor.ClassGenericClassesForm(config));

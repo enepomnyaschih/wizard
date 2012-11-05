@@ -20,8 +20,8 @@
 			dataField  : "genericClass",
 			
 			extraCfg : {
-				model : this.model,
-				clazz : this.clazz
+				editor : this.editor,
+				clazz  : this.clazz
 			}
 		});*/
 	},
