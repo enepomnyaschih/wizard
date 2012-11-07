@@ -68,7 +68,7 @@
 			selectedIndex : index
 		});
 		var offset = this.el.offset();
-		offset.top += this.el.outerHeight();
+		offset.top += this.el.outerHeight() + 3;
 		this.dropdown.el.offset(offset);
 		this.dropdown.bind("submit", this._onDropdownSubmit, this);
 		this.dropdown.filterEl.blur(JW.Function(this._onDropdownBlur, this));

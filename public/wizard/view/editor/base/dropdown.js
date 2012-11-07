@@ -30,6 +30,7 @@
 			creator    : this._createOptionView,
 			scope      : this
 		});
+		this._initSelectedIndex();
 		this._setSelectedIndex(this._adjustSelection());
 	},
 	

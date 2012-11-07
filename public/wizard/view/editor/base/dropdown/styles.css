@@ -1,7 +1,16 @@
 ﻿.wizard-editor-dropdown {
 	background-color: white;
 	border: 1px solid black;
-	margin-top: 3px;
 	padding: 5px;
 	position: absolute;
+}
+.wizard-editor-dropdown-options {
+	border: 1px solid black;
+}
+.wizard-editor-dropdown-option {
+	padding: 0 2px;
+}
+.wizard-editor-dropdown-option.wizard-selected {
+	background-color: #3879D9;
+	color: white;
 }

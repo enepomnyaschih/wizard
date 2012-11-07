@@ -5,6 +5,7 @@
 	
 	Optional
 	Boolean selected;
+	Boolean available;
 	*/
 	
 	render: function() {
@@ -20,3 +21,4 @@
 });
 
 wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "selected", false);
+wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "available", true);
