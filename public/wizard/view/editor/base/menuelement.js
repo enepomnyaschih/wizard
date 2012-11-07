@@ -5,7 +5,6 @@
 	
 	Fields
 	wizard.view.editor.Form form;
-	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
 	wizard.view.editor.Dropdown dropdown;
 	
 	Abstract methods
@@ -59,10 +58,6 @@
 		delete this.form;
 	},
 	
-	_updateExpanded: function() {
-		this.el.toggleClass("wizard-collapsed", !this.expanded);
-	},
-	
 	// override
 	_onFocus: function() {
 		var options = this._createOptions();
@@ -72,6 +67,9 @@
 			options       : options,
 			selectedIndex : index
 		});
+		var offset = this.el.offset();
+		offset.top += this.el.outerHeight();
+		this.dropdown.el.offset(offset);
 		this.dropdown.bind("submit", this._onDropdownSubmit, this);
 		this.dropdown.filterEl.blur(JW.Function(this._onDropdownBlur, this));
 		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
@@ -117,5 +115,3 @@
 		delete this.dropdown;
 	}
 });
-
-wizard.Util.addProperty(wizard.view.editor.MenuElement, Boolean, "expanded", false);

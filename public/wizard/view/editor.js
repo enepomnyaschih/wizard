@@ -94,6 +94,7 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		if (element.expanded) {
 			return branch;
 		}
+		branch.push(element);
 		while (element.parentElement && !element.parentElement.expanded) {
 			element = element.parentElement;
 			branch.push(element);
@@ -103,10 +104,7 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	},
 	
 	_collapse: function(rootElement) {
-		if (!this.focusedElement || (this.focusedElement === rootElement)) {
-			return;
-		}
-		var element = this.focusedElement.parentElement;
+		var element = this.focusedElement;
 		while (element && (element !== rootElement)) {
 			element.setExpanded(false);
 			element = element.parentElement;

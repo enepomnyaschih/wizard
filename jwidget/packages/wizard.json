@@ -38,6 +38,7 @@
 		"wizard/view/editor/styles.css",
 		"wizard/view/editor/base/dropdown.js",
 		"wizard/view/editor/base/dropdown/main.jw.html : wizard.view.editor.Dropdown",
+		"wizard/view/editor/base/dropdown/styles.css",
 		"wizard/view/editor/base/dropdown/option.js",
 		"wizard/view/editor/base/element.js",
 		"wizard/view/editor/base/form.js",

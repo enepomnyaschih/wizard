@@ -1,4 +1,7 @@
-﻿.wizard-editor-line-add {
+﻿.wizard-editor div {
+	text-decoration: inherit;
+}
+.wizard-editor-line-add {
 	display: inline-block;
 }
 .wizard-editor-line-body {
@@ -11,14 +14,11 @@
 	color: blue;
 	cursor: pointer;
 }
-.wizard-editor-element.wizard-invalid {
+.wizard-editor-element.wizard-collapsed.wizard-invalid {
 	color: red;
 }
 .wizard-editor-element.wizard-focused {
-	color: green;
-}
-.wizard-editor-element.wizard-invalid.wizard-focused {
-	color: purple;
+	text-decoration: underline;
 }
 .wizard-editor-form {
 	display: inline-block;

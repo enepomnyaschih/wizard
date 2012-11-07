@@ -11,6 +11,7 @@
 	
 	Fields
 	Boolean focused;
+	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
 	
 	Abstract methods
 	void _onFocus();
@@ -70,6 +71,10 @@
 		this.el.toggleClass("wizard-focused", this.focused);
 	},
 	
+	_updateExpanded: function() {
+		this.el.toggleClass("wizard-collapsed", !this.expanded);
+	},
+	
 	_onClick: function(event) {
 		if (this.ctrlKey || !this.parentElement || this.parentElement.expanded) {
 			event.stopPropagation();
@@ -77,3 +82,5 @@
 		}
 	}
 });
+
+wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "expanded", false);
