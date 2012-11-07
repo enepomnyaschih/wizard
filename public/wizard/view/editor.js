@@ -1,7 +1,9 @@
 ﻿/*
 	Focus model public interface:
 	wizard.view.editor.Element:focus;
+	wizard.view.editor.MenuElement:focusIn;
 	wizard.view.Editor:blur;
+	wizard.view.Editor:issueBlur;
 	wizard.view.Editor:focusNext;
 	wizard.view.Editor:focusPrev;
 	
@@ -18,19 +20,27 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	wizard.view.editor.Element focusedElement;
 	*/
 	
+	destroy: function() {
+		clearTimeout(this._blurTimer);
+		this.blur();
+		this._super();
+	},
+	
 	setRootElement: function(element) {
 		// assert !this.rootElement;
 		this.rootElement = element;
 	},
 	
 	findClickableElement: function(element) {
-		while (element.parent && !element.parent.expanded) {
-			element = element.parent;
+		while (element.parentElement && !element.parentElement.expanded) {
+			element = element.parentElement;
 		}
 		return element;
 	},
 	
 	onFocus: function(element) {
+		clearTimeout(this._blurTimer);
+		this._lock = true;
 		if (this.focusedElement) {
 			this.focusedElement.onBlur();
 		}
@@ -39,23 +49,44 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		this._collapse(rootElement);
 		JW.eachByMethod(branch, "setExpanded", [ true ]);
 		this.focusedElement = element;
+		delete this._lock;
 	},
 	
 	blur: function() {
-		if (!this.focusedElement) {
+		clearTimeout(this._blurTimer);
+		if (!this.focusedElement || this._lock) {
 			return;
 		}
+		this._lock = true;
 		this.focusedElement.onBlur();
 		this._collapse();
 		delete this.focusedElement;
+		delete this._lock;
+	},
+	
+	issueBlur: function() {
+		if (this._lock || this._blurTimer) {
+			return;
+		}
+		this._blurTimer = setTimeout(JW.Function(this.blur, this), 1);
 	},
 	
 	focusNext: function() {
-		
+		clearTimeout(this._blurTimer);
+		if (this._lock) {
+			return;
+		}
+		this._lock = true;
+		delete this._lock;
 	},
 	
 	focusPrev: function() {
-		
+		clearTimeout(this._blurTimer);
+		if (this._lock) {
+			return;
+		}
+		this._lock = true;
+		delete this._lock;
 	},
 	
 	_getExpandingBranch: function(element) {
@@ -63,9 +94,8 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		if (element.expanded) {
 			return branch;
 		}
-		branch.push(element);
-		while (element.parent && !element.parent.expanded) {
-			element = element.parent;
+		while (element.parentElement && !element.parentElement.expanded) {
+			element = element.parentElement;
 			branch.push(element);
 		}
 		branch.reverse();
@@ -76,10 +106,10 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		if (!this.focusedElement || (this.focusedElement === rootElement)) {
 			return;
 		}
-		var element = this.focusedElement.parent;
+		var element = this.focusedElement.parentElement;
 		while (element && (element !== rootElement)) {
 			element.setExpanded(false);
-			element = element.parent;
+			element = element.parentElement;
 		}
 	}
 });

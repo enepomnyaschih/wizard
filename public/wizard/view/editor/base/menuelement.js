@@ -5,25 +5,33 @@
 	
 	Fields
 	wizard.view.editor.Form form;
-	Boolean expanded;
+	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
+	wizard.view.editor.Dropdown dropdown;
 	
 	Abstract methods
 	wizard.view.editor.Form _createForm();
-	Array<wizard.view.editor.MenuElementOption> _createOptions();
-	string _getMenuValue();
+	Array<wizard.view.editor.MenuOption> _createOptions();
+	String _getMenuValue();
 	*/
 	
 	render: function() {
 		this._super();
 		this._updateExpanded();
 		this._initForm();
-		this.form = this._createForm();
-		this.addChild(this.form);
 	},
 	
 	destroyComponent: function() {
 		this._doneForm();
 		this._super();
+	},
+	
+	focusIn: function() {
+		var element = this.form.elements.getItemAt(0);
+		if (element) {
+			element.focus();
+		} else {
+			this.editor.focusNext(this);
+		}
 	},
 	
 	_updateForm: function() {
@@ -33,12 +41,12 @@
 	},
 	
 	_initForm: function() {
-		if (!this.form) {
+		if (this.form) {
 			return;
 		}
 		this.form = this._createForm();
 		this.form.elements.every(function(element) {
-			element.parent = this;
+			element.parentElement = this;
 		}, this);
 		this.addChild(this.form);
 	},
@@ -55,20 +63,58 @@
 		this.el.toggleClass("wizard-collapsed", !this.expanded);
 	},
 	
-	_onClick: function(event) {
-		event.stopPropagation();
-		var element = this.focused ?
-			this.form.elements.getItemAt(0) :
-			this.editor.findClickableElement(this);
-		if (element) {
-			element.focus();
-		}
-	},
-	
+	// override
 	_onFocus: function() {
+		var options = this._createOptions();
+		var value = this._getMenuValue();
+		var index = JW.findBy(options, value);
+		this.dropdown = new wizard.view.editor.Dropdown({
+			options       : options,
+			selectedIndex : index
+		});
+		this.dropdown.bind("submit", this._onDropdownSubmit, this);
+		this.dropdown.filterEl.blur(JW.Function(this._onDropdownBlur, this));
+		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
 	},
 	
 	_focusField: function() {
+		this.dropdown.filterEl.focus();
+	},
+	
+	_onDropdownSubmit: function(event, option) {
+		this._submit(option);
+	},
+	
+	_onDropdownBlur: function() {
+		this.editor.issueBlur();
+	},
+	
+	_onDropdownKeyDown: function(event) {
+		switch (event.which) {
+			case 13: this._submit(this.dropdown.getSelectedOption()); break;
+			case 27: this._doneDropdown(); break;
+			default: return;
+		}
+		event.preventDefault();
+	},
+	
+	_submit: function(option) {
+		if (!option) {
+			return;
+		}
+		if (option.value !== this._getMenuValue()) {
+			option.applier.call(option.scope, option);
+		}
+		this._doneDropdown();
+		this.focusIn();
+	},
+	
+	_doneDropdown: function() {
+		if (!this.dropdown) {
+			return;
+		}
+		this.dropdown.destroy();
+		delete this.dropdown;
 	}
 });
 

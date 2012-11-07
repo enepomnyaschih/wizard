@@ -7,7 +7,7 @@
 	wizard.view.Editor editor;
 	
 	Optional
-	wizard.view.editor.MenuElement parent;
+	wizard.view.editor.MenuElement parentElement;
 	
 	Fields
 	Boolean focused;
@@ -15,6 +15,7 @@
 	Abstract methods
 	void _onFocus();
 	void _focusField();
+	view _onBlur();
 	*/
 	
 	focused : false,
@@ -26,6 +27,13 @@
 		this.el.click(JW.Function.inScope(this._onClick, this));
 	},
 	
+	destroyComponent: function() {
+		if (this.focused) {
+			this.editor.blur();
+		}
+		this._super();
+	},
+	
 	validate: function() {
 		var isValid = this._isValid();
 		this.el.toggleClass("wizard-invalid", !isValid);
@@ -33,6 +41,9 @@
 	},
 	
 	focus: function() {
+		if (this.editor._lock) {
+			return;
+		}
 		if (!this.focused) {
 			this.editor.onFocus(this);
 			this.focused = true;
@@ -48,6 +59,7 @@
 		}
 		this.focused = false;
 		this._updateFocused();
+		this._onBlur();
 	},
 	
 	_isValid: function() {
@@ -59,7 +71,9 @@
 	},
 	
 	_onClick: function(event) {
-		event.stopPropagation();
-		this.focus();
+		if (this.ctrlKey || !this.parentElement || this.parentElement.expanded) {
+			event.stopPropagation();
+			this.focus();
+		}
 	}
 });

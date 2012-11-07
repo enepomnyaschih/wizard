@@ -11,7 +11,7 @@
 	
 	// override
 	_createChildren: function() {
-		var kind = this.clazz.kind;
+		var kind = this.clazz.classKind;
 		var children = [];
 		var config = {
 			editor : this.editor,

@@ -48,6 +48,11 @@
 		this.namePicker.focus();
 	},
 	
+	destroyComponent: function() {
+		this.editor.destroy();
+		this._super();
+	},
+	
 	_onDeleteClick: function() {
 		this.module.remove();
 	},

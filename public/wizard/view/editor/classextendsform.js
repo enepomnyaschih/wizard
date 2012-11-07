@@ -9,7 +9,7 @@
 	*/
 	
 	// override
-	_createElements: function() {
+	/*_createElements: function() {
 		this.classElement = new wizard.view.editor.ClassElement({
 			editor    : this.editor,
 			validator : this._validateClass,
@@ -20,5 +20,5 @@
 		return [
 			this.classElement
 		];
-	}
+	}*/
 });

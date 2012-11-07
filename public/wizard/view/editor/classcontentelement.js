@@ -45,7 +45,7 @@
 	
 	_createDropdownOption: function(kind) {
 		var self = this;
-		return new wizard.view.editor.MenuElementOption({
+		return new wizard.view.editor.MenuOption({
 			label   : kind.name,
 			value   : kind.id,
 			applier : function() {

@@ -14,6 +14,12 @@
 .wizard-editor-element.wizard-invalid {
 	color: red;
 }
+.wizard-editor-element.wizard-focused {
+	color: green;
+}
+.wizard-editor-element.wizard-invalid.wizard-focused {
+	color: purple;
+}
 .wizard-editor-form {
 	display: inline-block;
 }
