@@ -1,0 +1,880 @@
+﻿Простой пример. Как написать команду?
+this.loaders.push(config);
+
+- кликаем "new action"
+- выбираем "call method"
+- самый первый элемент выбирается автоматически
+[-object-].[-method-]()
+ ^^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "get field"
+[[-object-].[-field-]].[-method-]()
+  ^^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "this"
+[[this].[-field-]].[-method-]()
+         ^^^^^^^
+
+- в меню, содержащем все видимые поля объекта "this" - выбираем "loaders"
+[this.loaders].[-method-]()
+                ^^^^^^^^
+
+- в меню, содержащем все публичные методы объекта "this.loaders" - выбираем "push"
+- поскольку метод "push" имеет произвольное число аргументов, внутри скобок появляется кнопка [+]
+[this.loaders].[push]([+])
+                       ^
+
+- кликаем по кнопке [+], чтобы добавить аргумент
+[this.loaders].[push]([-item-][-], [+])
+                       ^^^^^^
+
+- поскольку this.loaders имеет тип Array<Map<String>>, то в качестве аргумента необходимо передать объект типа "Map<String>"
+- в меню "null", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "variable"
+- в подменю, содержащем все переменные типа "Map<String>" - выбираем "config"
+[this.loaders].[push]([config][-], [+])
+                                    ^
+
+- нажимаем Tab, чтобы завершить ввод аргументов
+this.loaders.push(config)
+
+JSON-представление команды:
+{
+	"kind" : "method",
+	"object" : {
+		"kind" : "field",
+		"object" : {
+			"kind" : "this"
+		},
+		"field" : ref@Class1.loaders
+	},
+	"method" : ref@Class2.push,
+	"arguments" : [
+		{
+			"kind" : "var",
+			"var" : ref@Class1.loaders.var
+		}
+	]
+}
+
+
+
+
+--------
+
+Сложный пример. Как написать команду?
+return this.accountProfile ? this.accountProfile.getAccessParams() : { accesskey : jw.Params.accesskey };
+
+- кликаем "new action"
+- выбираем "return value"
+return [-value-]
+        ^^^^^^^
+
+- возвращаемое значение должно иметь тип, указанный в объявлении текущего метода - "Map<String>"
+- в меню "null", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "?: operator"
+return [([-condition-] ? [-value1-] : [-value2-])]
+          ^^^^^^^^^^^
+
+- в качестве "condition" необходимо выбрать значение типа "boolean"
+- в меню "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "! operator", "== operator (number)", "!= operator (number)", "> operator (number)", ">= operator (number)", "< operator (number)", "<= operator (number)", "== operator (string)", "!= operator (string)", "> operator (string)", ">= operator (string)", "< operator (string)", "<= operator (string)", "== operator (boolean)", "!= operator (boolean)", "|| operator", "&& operator", "^^ operator", "?: operator (boolean)", "Convert number to boolean", "Convert string to boolean" - выбираем "!= operator"
+- в подменю "number", "string", "boolean", "Object" - выбираем "Object"
+return [([[-object1-] != [-object2-]] ? [-value1-] : [-value2-])]
+           ^^^^^^^^^
+
+- в меню "null", "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "get field"
+return [([([[-object-].[-field-]] != [-object2-]]) ? [-value1-] : [-value2-])]
+             ^^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "this"
+return [([([[this].[-field-]] != [-object2-]]) ? [-value1-] : [-value2-])]
+                    ^^^^^^^
+
+- в меню, содержащем все видимые поля объекта "this", которые имеют тип "Object" - выбираем "accountProfile"
+return [([([this.accountProfile] != [-object2-]]) ? [-value1-] : [-value2-])]
+                                     ^^^^^^^^
+
+- в меню "null", "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "null"
+return [([(this.accountProfile != null)] ? [-value1-] : [-value2-])]
+                                            ^^^^^^^^
+
+- в качестве "value1" и "value2" необходимо выбрать тип всего выражения - "Map<String>"
+- в меню "null", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "call method"
+return [([(this.accountProfile != null)] ? [[-object-].[-method-]()] : [-value2-])]
+                                             ^^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "get field"
+return [([(this.accountProfile != null)] ? [[[-object-].[-field-]].[-method-]()] : [-value2-])]
+                                              ^^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "this"
+return [([(this.accountProfile != null)] ? [[[this].[-field-]].[-method-]()] : [-value2-])]
+                                                     ^^^^^^^
+
+- в меню, содержащем все видимые поля объекта "this" - выбираем "accountProfile"
+return [([(this.accountProfile != null)] ? [[this.accountProfile].[-method-]()] : [-value2-])]
+                                                                   ^^^^^^^^
+
+- в меню, содержащем все публичные методы объекта "this.accountProfile", которые возвращают "Map<String>" или ("Map<T extends B>" такой, что String extends B) - выбираем "getAccessParams"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [-value2-])]
+                                                                                      ^^^^^^^^
+
+- в меню "null", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "call static method"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[-class-].[-method-]()])]
+                                                                                       ^^^^^^^
+
+- в меню, содержащем все классы, которые имеют статические методы, которые возвращают "Map<String>" или ("Map<T extends B>" такой, что String extends B) - выбираем "Maps"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[-method-]()])]
+                                                                                              ^^^^^^^^
+
+- в меню, содаржащем все статические методы класса "Maps", которые возвращают "Map<String>" или ("Map<T extends B>" такой, что String extends B) - выбираем "singleton"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton]([-key-], [-value-])])]
+                                                                                                          ^^^^^
+
+- в меню "string constant", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "+ operator", "?: operator", "Convert number to string", "Convert boolean to string", "Convert object to string" - выбираем "string constant"
+- в подменю вводим значение "accesskey"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [-value-])])]
+                                                                                                                         ^^^^^^^
+
+- в меню "null", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "call method"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[-object-].[-method-]()])])]
+                                                                                                                          ^^^^^^^
+
+- в меню "this", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "new object", "|| operator", "&& operator", "?: operator" - выбираем "new object"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new [-class-]:[-constructor-]()].[-method-]()])])]
+                                                                                                                               ^^^^^^^
+
+- в меню, содержащем все инстанциируемые классы, выбираем "String"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new [String]:[-constructor-]()].[-method-]()])])]
+                                                                                                                                        ^^^^^^^^^^^^^
+
+- в меню, содержащем все конструкторы класса "String", выбираем "byValue"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new [String]:[byValue]([-value-])].[-method-]()])])]
+                                                                                                                                                  ^^^^^^^
+
+- в меню "string constant", "variable", "call method", "call superclass method", "call static method", "get field", "get static field", "+ operator", "?: operator", "Convert number to string", "Convert boolean to string", "Convert object to string" - выбираем "get static field"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new [String]:[byValue]([[-class-].[-field-]])].[-method-]()])])]
+                                                                                                                                                   ^^^^^^^
+
+- в меню, содержащем все классы, которые имеют статические поля типа "string" - выбираем "jw.Params"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new [String]:[byValue]([[jw.Params].[-field-]])].[-method-]()])])]
+                                                                                                                                                               ^^^^^^^
+
+- в меню, содержащем все статические поля класса "jw.Params", которые имеют тип "string" - выбираем "accesskey"
+return [([(this.accountProfile != null)] ? [this.accountProfile.getAccessParams()] : [[Maps].[singleton](["accesskey"], [[new String:byValue(jw.Params.accesskey)].[-method-]()])])]
+                                                                                                                                                                    ^^^^^^^^
+
+- в меню, содержащем все методы класса "String", которые возвращают тип "string" - выбираем "valueOf"
+return ((this.accountProfile != null) ? this.accountProfile.getAccessParams() : Maps.singleton("accesskey", new String:byValue(jw.Params.accesskey).valueOf()))
+
+Класс String является нативным. Все его конструкторы и методы оптимизируются при выводе в JavaScript. Выходной JavaScript:
+return ((self.accountProfile !== null) ? self.accountProfile.getAccessParams() : Maps.singleton("accesskey", jw.Params.accesskey));
+
+JSON-представление команды:
+{
+	"kind" : "return",
+	"value" : {
+		"kind" : "?:",
+		"condition" : {
+			"kind" : "!=",
+			"type" : "object",
+			"x" : {
+				"kind" : "field",
+				"object" : {
+					"kind" : "this"
+				},
+				"field" : ref@Class1.accountProfile
+			},
+			"y" : {
+				"kind" : "null"
+			}
+		},
+		"x" : {
+			"kind" : "method",
+			"object" : {
+				"kind" : "field",
+				"object" : {
+					"kind" : "this"
+				},
+				"field" : ref@Class1.accountProfile
+			},
+			"method" : ref@Class2.getAccessParams,
+			"arguments" : []
+		},
+		"y" : {
+			"kind" : "staticMethod",
+			"class" : ref@Maps,
+			"method" : ref@Maps.singleton,
+			"arguments" : [
+				{
+					"kind" : "stringConstant",
+					"value" : "accesskey"
+				},
+				{
+					"kind" : "staticField",
+					"class" : ref@jw.Params,
+					"field" : ref@jw.Params.accessKey
+				}
+			]
+		}
+	}
+}
+
+
+
+
+--------
+
+--------
+
+Дерево классов
+
+primitive
+	void
+	number
+	string
+	boolean
+	Object
+		Number
+		String
+		Boolean
+
+--------
+
+Элементы и формы
+
+Элемент можно выбирать. У элемента всегда есть меню для выбора значения или вариации. При выборе вариации элемент раскрывается в форму. Значение элемента можно копипастить. Нажатием клавиши Delete значение элемента можно очистить. Если элемент состоит в списке, то Delete удалит его и списка. Элемент может быть опциональным (необязательным для ввода).
+Форму выбирать нельзя. У нее нет вариаций, она прибита гвоздями. Внутри формы, как правило, есть другие элементы.
+
+Элемент, который можно выбрать, подсвечивается синим шрифтом.
+Элемент с фокусом, подсвечивается зеленым шрифтом.
+Невалидный элемент подсвечивается красным шрифтом.
+Невалидный элемент с фокусом подсвечивается фиолетовым шрифтом.
+Неактивный элемент подсвечивается серым шрифтом.
+Выбранный текстовый элемент выделяется подчеркиванием.
+Выбранный структурный элемент выделяется рамкой.
+Элемент, который раскроется при клике мышью, подсвечивается голубым фоном.
+
+Навигация
+- Чтобы выбрать элемент, нужно по нему кликнуть, или добраться до туда через Tab или Shift+Tab
+- Чтобы выбрать дочерний элемент, нужно выбрать родительский элемент, а затем кликнуть по нему или нажать кнопку Enter
+- Чтобы сразу выбрать наиболее глубокий элемент, нужно кликнуть по нему с нажатой клавишей Ctrl
+- Чтобы выйти из дочернего элемента, нужно нажать Esc, либо обойти его через Tab или Shift+Tab
+
+--------
+
+Элемент ввода команды
+
+- expression
+- return
+- call superclass constructor
+- conditional statement
+- switch
+- for loop
+- while loop
+- until loop
+- break
+- continue
+
+Каждая команда имеет свою иконку, кликнув по которой можно изменить команду.
+
+"expression" раскрывается в строку "[-expression-]".
+[-expression-] является элементом ввода значения с фильтром "команда".
+
+"return" раскрывается в строку "return [-value-]".
+[-value-] является элементом ввода значения с фильтром по типу, указанному в объявлении текущего метода.
+Если текущий метод "void", то [-value-] опускается.
+
+"call superclass constructor" раскрывается в форму ввода конструктора базового класса.
+
+"conditional statement" раскрывается в структуру:
+	if [-condition-]
+	then
+		variables [+]
+		actions [+]
+	else
+		variables [+]
+		actions [+]
+[-condition-] является элементом ввода булева.
+"then" и "else" являются блоками команд.
+
+"switch" раскрывается в структуру:
+	switch [-value-] [+]
+		default
+			variables [+]
+			actions [+]
+[-value-] является элементом ввода числа или строки с фильтром "не константа".
+[+] в строке "switch" неактивен до тех пор, пока пользователь не выберет значение [-value-]. [+] добавляет структуру вида:
+		case [-value-]
+			variables [+]
+			actions [+]
+[-value-] является элементом ввода значения с фильтром по типу [-value-], выбранного в строке "switch", и с фильтром "константа".
+"case" и "default" являются блоками команд.
+
+"for loop" раскрывается в структуру:
+	for [-initial-]; [-condition-]; [-incremental-]
+		variables [+]
+		actions [+]
+[-initial-] является опциональным элементом объявления переменной.
+[-condition-] является элементом ввода булева.
+[-incremental-] являются опциональным элементом ввода команды с фильтром "выражение".
+"for" является блоком команд.
+
+"while loop" раскрывается в структуру:
+	while [-condition-]
+		variables [+]
+		actions [+]
+[-condition-] является элементом ввода булева.
+"while" является блоком команд.
+
+"until loop" раскрывается в структуру:
+	do
+		variables [+]
+		actions [+]
+	until [-condition-]
+"do" является блоком команд.
+[-condition-] является элементом ввода булева.
+
+Фильтры:
+- выражение: только "expression"
+- не конструктор: все, кроме "call superclass constructor"
+- не цикл: все, кроме break и continue
+
+--------
+
+Элемент ввода значения
+
+- number constant
+- string constant
+- true
+- false
+- null
+- this
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+- new object
+- + operator (number)
+- + operator (string)
+- - operator (number)
+- * operator (number)
+- / operator (number)
+- % operator (number)
+- & operator (number)
+- | operator (number)
+- ^ operator (number)
+- << operator (number)
+- >> operator (number)
+- <<< operator (number)
+- >>> operator (number)
+- == operator (number)
+- == operator (string)
+- == operator (boolean)
+- == operator (object)
+- != operator (number)
+- != operator (string)
+- != operator (boolean)
+- != operator (object)
+- > operator (number)
+- > operator (string)
+- < operator (number)
+- < operator (string)
+- >= operator (number)
+- >= operator (string)
+- <= operator (number)
+- <= operator (string)
+- && operator (boolean)
+- && operator (object)
+- || operator (boolean)
+- || operator (object)
+- ^^ operator (boolean)
+- = operator (number)
+- = operator (string)
+- = operator (boolean)
+- = operator (object)
+- += operator (number)
+- += operator (string)
+- -= operator (number)
+- *= operator (number)
+- /= operator (number)
+- %= operator (number)
+- &= operator (number)
+- |= operator (number)
+- ^= operator (number)
+- <<= operator (number)
+- >>= operator (number)
+- <<<= operator (number)
+- >>>= operator (number)
+- &&= operator (boolean)
+- ||= operator (boolean)
+- ^^= operator (boolean)
+- - unary operator (number)
+- ++ prefix operator (number)
+- -- prefix operator (number)
+- ++ postfix operator (number)
+- -- postfix operator (number)
+- ! operator (boolean)
+- ?: operator (number)
+- ?: operator (string)
+- ?: operator (boolean)
+- ?: operator (object)
+- convert string to number
+- convert number to string
+- convert boolean to string
+- convert object to string
+
+"number constant" раскрывается в форму ввода числа.
+"string constant" раскрывается в форму ввода строки.
+"true". Выходной JSON: { "kind" : "true" }
+"false". Выходной JSON: { "kind" : "false" }
+"null". Выходной JSON: { "kind" : "null" }
+"this" доступен лишь в том случае, если удовлетворяет фильтру по типу, и если реализуется конструктор или неститический метод. Выходной JSON: { "kind" : "this" }
+"variable" раскрывается в форму выбора переменной подходящего типа в текущей области видимости. Выходной JSON: { "kind" : "var", "var" : <ссылка> }
+"call method" раскрывается в форму запуска метода. Доступны лишь методы, возвращающие подходящий тип.
+"call superclass method" раскрывается в форму запуска метода базового класса. Доступны лишь методы, возвращающие подходящий тип.
+"call static method" раскрывается в форму запуска статического метода. Доступны лишь методы, возвращающие подходящий тип.
+"field" раскрывается в форму ввода поля. Доступны лишь поля, имеющие подходящий тип.
+"static field" раскрывается в форму ввода статического поля. Доступны лишь поля, имеющие подходящий тип.
+"new object" раскрывается в форму конструирования объекта. Доступны лишь подходящие классы.
+Операторы +, -, *, /, %, &, |, ^, <<, >>, <<<, >>>, ==, !=, >, <, >=, <=, &&, ||, ^^ раскрываются в форму бинарного оператора соответствующего типа.
+Операторы =, +=, -=, *=, /=, %=, &=, |=, ^=, <<=, >>=, <<<=, >>>=, &&=, ||=, ^^= раскрываются в форму оператора присваивания соответствующего типа.
+Операторы ++, --, ! и унарный - раскрываются в форму унарного оператора соответствующего типа.
+Оператор ?: раскрывается в форму условного оператора соответствующего типа.
+"convert string to number" раскрывается в форму приведения типа. Выходной JSON: { "kind" : "stringToNumber", "value" : <значение> }
+"convert number to string" раскрывается в форму приведения типа. Выходной JSON: { "kind" : "numberToString", "value" : <значение> }
+"convert boolean to string" раскрывается в форму приведения типа. Выходной JSON: { "kind" : "booleanToString", "value" : <значение> }
+"convert object to string" раскрывается в форму приведения типа. Выходной JSON: { "kind" : "objectToString", "value" : <значение> }
+
+Фильтры:
+- левый аргумент присваивания: только "variable", "field", "static field".
+- команда: только "call method", "call superclass method", "call static method", "new object", операторы &&, ||, =, +=, -=, *=, /=, %=, &=, |=, ^=, <<=, >>=, <<<=, >>>=, &&=, ||=, ^^=, ?: и префиксные ++, --.
+- константа: только "number constant", "string constant", "true", "false", "null".
+- не константа: все, кроме "number constant", "string constant", "true", "false", "null".
+- не null: все, кроме "null"
+
+Фильтры по типу
+
+number
+- number constant
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+- + operator (number)
+- - operator (number)
+- * operator (number)
+- / operator (number)
+- % operator (number)
+- & operator (number)
+- | operator (number)
+- ^ operator (number)
+- << operator (number)
+- >> operator (number)
+- <<< operator (number)
+- >>> operator (number)
+- = operator (number)
+- += operator (number)
+- -= operator (number)
+- *= operator (number)
+- /= operator (number)
+- %= operator (number)
+- &= operator (number)
+- |= operator (number)
+- ^= operator (number)
+- <<= operator (number)
+- >>= operator (number)
+- <<<= operator (number)
+- >>>= operator (number)
+- - unary operator (number)
+- ++ prefix operator (number)
+- -- prefix operator (number)
+- ++ postfix operator (number)
+- -- postfix operator (number)
+- ?: operator (number)
+- convert string to number
+
+string
+- string constant
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+
+boolean
+- true
+- false
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+- == operator (number)
+- == operator (string)
+- == operator (boolean)
+- == operator (object)
+- != operator (number)
+- != operator (string)
+- != operator (boolean)
+- != operator (object)
+- > operator (number)
+- > operator (string)
+- < operator (number)
+- < operator (string)
+- >= operator (number)
+- >= operator (string)
+- <= operator (number)
+- <= operator (string)
+- && operator (boolean)
+- || operator (boolean)
+- ^^ operator (boolean)
+- = operator (boolean)
+- &&= operator (boolean)
+- ||= operator (boolean)
+- ^^= operator (boolean)
+- ! operator (boolean)
+- ?: operator (boolean)
+
+object
+- null
+- this
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+- new object
+- && operator (object)
+- || operator (object)
+- = operator (object)
+- ?: operator (object)
+
+--------
+
+Форма ввода числа
+
+([-value-])
+[-value-] является элементом ввода числа.
+
+--------
+
+Форма ввода строки
+
+([-value-])
+[-value-] является элементом ввода строки.
+
+--------
+
+Форма ввода переменной
+
+([-variable-])
+[-variable-] является элементом ввода переменной подходящего типа в текущей области видимости.
+
+Параметры:
+- область видимости переменных
+
+Фильтры:
+- по типу
+
+--------
+
+Форма запуска метода
+
+[-object-].[-method-]
+
+[-object-] является элементом выбора объекта с фильтром "не null".
+[-method-] является элементом запуска метода класса объекта [-object-] с фильтром по типу возвращаемого значения. Элемент является недоступным до тех пор, пока не будет выбрано значение [-object-]. Если [-object-] = "this", то открываются все методы, иначе - только публичные.
+
+Фильтры:
+- по типу возвращаемого значения
+
+Выходной JSON:
+{
+	"kind" : "method",
+	"object" : ...,
+	"method" : ...,
+	"genericTypes" : [
+		...
+	],
+	"arguments" : [
+		...
+	]
+}
+
+--------
+
+Форма запуска метода базового класса
+
+super.[-method-]
+[-method-] является элементом запуска метода базового класса с фильтром "только публичные и защищенные" и по типу возвращаемого значения.
+
+Фильтры:
+- по типу возвращаемого значения
+
+Выходной JSON:
+{
+	"kind" : "superMethod",
+	"method" : ...,
+	"genericTypes" : [
+		...
+	],
+	"arguments" : [
+		...
+	]
+}
+
+--------
+
+Форма запуска статического метода
+
+[-class-].[-method-]
+[-class-] является элементом выбора класса с фильтром "есть хотя бы один статический метод".
+[-method-] является элементом запуска метода класса [-class-] с фильтром "статический" и по типу возвращаемого значения. Элемент является недоступным до тех пор, пока не будет выбрано значение [-class-].
+
+Фильтры:
+- по типу возвращаемого значения
+
+Выходной JSON:
+{
+	"kind" : "staticMethod",
+	"class" : ...,
+	"method" : ...,
+	"genericTypes" : [
+		...
+	],
+	"arguments" : [
+		...
+	]
+}
+
+--------
+
+Форма ввода конструктора базового класса
+
+super:[-constructor-]()
+
+[-constructor-] является элементом выбора конструктора базового класса.
+После выбора конструктора появляются элементы для ввода значений аргументов. Элемент ввода значения аргумента ограничен типом аргумента, указанным в объявлении конструктора.
+Если конструктор имеет неопределенное число аргументов, то в конце списка аргументов появляется кнопка [+] для добавления аргумента. Всякий дополнительный аргумент, добавленный кнопкой [+], получит кнопку [-] для его удаления.
+
+--------
+
+Форма ввода поля
+
+[-object-].[-field-]
+[-object-] является элементом выбора объекта с фильтром "не null".
+[-field-] является элементом выбора поля класса объекта [-object-]. Элемент является недоступным до тех пор, пока не будет выбрано значение [-object-]. Если [-object-] = "this", то открываются все поля, иначе - только публичные.
+
+Фильтры:
+- по типу
+
+--------
+
+Форма ввода статического поля
+
+[-class-].[-field-]()
+[-class-] является элементом выбора класса с фильтром "есть хотя бы одно статическое поле".
+[-field-] является элементом выбора поля класса [-class-] с фильтром "только статические". Элемент является недоступным до тех пор, пока не будет выбрано значение [-class-].
+
+Фильтры:
+- по типу
+
+--------
+
+Форма бинарного оператора для ввода <T>
+
+([-value1-] + [-value2-])
+[-value1-] и [-value2-] являются элементами ввода T.
+
+--------
+
+Форма оператора присваивания <T>
+
+([-reference-] = [-value-])
+[-reference-] является элементом ввода T с фильтром "левая часть присваивания". Если T не является финальным, то [-value-] неактивен до тех пор, пока пользователь не выберет значение [-reference-]. [-value-] является элементом ввода значения того же типа, что и введенный [-reference-].
+
+--------
+
+Форма условного оператора <T>
+
+([-condition-] ? [-value1-] : [-value2-])
+[-condition-] является элементом ввода булева. [-value1-] и [-value2-] являются элементами ввода T.
+
+--------
+
+Форма унарного оператора <T>
+
+![-value-]
+[-value-] является элементом ввода T.
+
+--------
+
+Форма оператора приведения типа <T>
+
+string([-value-])
+[-value-] является элементом ввода T.
+
+--------
+
+Форма оператора конструирования объекта
+
+new [-class-]:[-constructor-]()
+[-class-] является элементом выбора типа с фильтром "инстанциируемый".
+Элемент [-constructor-] является элементом выбора конструктора класса [-class-]. Элемент неактивен, пока пользователь не выберет [-class-].
+После выбора конструктора появляются элементы для ввода значений аргументов. Элемент ввода значения аргумента ограничен типом аргумента, указанным в объявлении конструктора.
+Если конструктора имеет неопределенное число аргументов, то в конце списка аргументов появляется кнопка [+] для добавления аргумента. Всякий дополнительный аргумент, добавленный кнопкой [+], получит кнопку [-] для его удаления.
+
+Фильтры:
+- по типу
+
+Выходной JSON:
+{
+	"kind" : "newObject",
+	"class" : ...,
+	"genericTypes" : [
+		...
+	],
+	"constructor" : ...,
+	"arguments" : [
+		...
+	]
+}
+
+--------
+
+Элемент ввода числа
+
+Поле для ввода числа.
+
+--------
+
+Элемент ввода строки
+
+Поле для ввода строки.
+
+--------
+
+Элемент ввода переменной
+
+Список переменных в текущей области видимости.
+
+Параметры:
+- область видимости переменных
+
+Фильтры:
+- по типу
+
+--------
+
+Элемент объявления переменной
+
+Всегда раскрывается в форму объявления переменной.
+
+--------
+
+Форма объявления переменной
+
+[-type-] [-name-] = [-value-]
+[-type-] является элементом ввода типа.
+[-name-] является элементом ввода имени с регулярным выражением и проверкой на конфликт в текущей области объявления.
+[-value-] является элементом ввода значения типа [-type-].
+
+--------
+
+Элемент ввода типа
+
+Всегда раскрывается в форму ввода типа.
+
+Параметры:
+- Область видимости generic-классов
+
+Фильтры
+- по типу
+- инстанциируемый
+- не примитивный и не generic
+- интерфейс
+
+--------
+
+Форма ввода типа
+
+[-type-]<>
+В элементе [-type-] необходимо выбрать подходящий тип, класс или generic-класс.
+Угловые скобки появляются только посте выбора класса, при условии, что у этого класса есть хотя бы один generic-тип.
+Внутри угловых скобок появляются элементы ввода типа с фильтром по типу "object".
+
+Фильтры:
+- по типу
+- инстанциируемый ("void", "number", "string", "boolean", generic-классы, абстрактные классы, статические классы и интерфейсы не являются инстанциируемыми)
+- не примитивный и не generic
+- интерфейс
+
+--------
+
+Элемент запуска метода класса
+
+Всегда раскрывается в форму запуска метода класса.
+
+Параметры:
+- класс
+
+Фильтры:
+- по типу возвращаемого значения
+- только публичные (нестатические)
+- только публичные и защищенные (нестатические)
+- только статические
+
+--------
+
+Форма запуска метода класса
+
+[-method-]<>()
+[-method-] является элементом выбора метода. Любой метод, который имеет generic-классы, является доступным. Остальные фильтруются по типу. Для generic-классов же валидация типа возвращаемого значения происходит после их выбора. Таким образом, значение элемента может сразу же стать невалидным (это временный костыль: в будущих версих будет разработан интеллектуальный фильтр методов).
+Угловые скобки появляются только после выбора метода, при условии, что у этого метода есть хотя бы один generic-класс.
+Внутри угловых скобок появляются элементы ввода типа с фильтром по типу базового класса соответствующего generic-класса.
+После выбора generic-классов появляются элементы для ввода значений аргументов. Элемент ввода значения аргумента ограничен типом аргумента, указанным в объявлении метода.
+Если метод имеет неопределенное число аргументов, то в конце списка аргументов появляется кнопка [+] для добавления аргумента. Всякий дополнительный аргумент, добавленный кнопкой [+], получит кнопку [-] для его удаления.
+
+Параметры:
+- класс
+
+Фильтры:
+- по типу возвращаемого значения
+- только публичные (нестатические)
+- только публичные и защищенные (нестатические)
+- только статические
+
+--------
+
+Элемент выбора метода класса
+
+Параметры:
+- класс
+
+Фильтры:
+- по типу возвращаемого значения
+- только публичные (нестатические)
+- только публичные и защищенные (нестатические)
+- только статические
+- не "final"
+
+--------
+
+Элемент выбора поля класса
+
+Меню со списком всех полей указанного класса.
+
+Параметры:
+- класс
+
+Фильтры:
+- по типу
+- только публичные (нестатические)
+- только публичные и защищенные (нестатические)
+- только статические
