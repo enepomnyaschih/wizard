@@ -16,12 +16,8 @@
 	
 	render: function() {
 		this._super();
-		
-		this.el.addClass("wizard-editor-form");
-		
 		this.elements = new JW.Collection(this._createElements());
 		this.children = new JW.Collection(this._createChildren());
-		
 		if (this.title) {
 			this.el.text(this.title);
 		}

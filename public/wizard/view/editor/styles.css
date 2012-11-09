@@ -7,9 +7,6 @@
 .wizard-editor-line-body {
 	padding-left: 10px;
 }
-.wizard-editor-element {
-	display: inline-block;
-}
 .wizard-editor-element.wizard-collapsed {
 	color: blue;
 	cursor: pointer;
@@ -18,8 +15,9 @@
 	color: red;
 }
 .wizard-editor-element.wizard-focused {
-	text-decoration: underline;
+	color: white;
+	background-color: #3879D9;
 }
-.wizard-editor-form {
-	display: inline-block;
+.wizard-editor-element.wizard-focused.wizard-invalid {
+	color: white;
 }

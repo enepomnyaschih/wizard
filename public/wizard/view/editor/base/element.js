@@ -23,7 +23,6 @@
 	
 	render: function() {
 		this._super();
-		this.el.addClass("wizard-editor-element");
 		this.validate();
 		this.el.click(JW.Function.inScope(this._onClick, this));
 	},
