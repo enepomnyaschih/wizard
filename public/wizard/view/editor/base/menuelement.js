@@ -60,22 +60,10 @@
 	
 	// override
 	_onFocus: function() {
-		var options = this._createOptions();
-		var value = this._getMenuValue();
-		var index = JW.findBy(options, value);
-		this.dropdown = new wizard.view.editor.Dropdown({
-			options       : options,
-			selectedIndex : index
-		});
-		var offset = this.el.offset();
-		offset.top += this.el.outerHeight() + 3;
-		this.dropdown.el.offset(offset);
-		this.dropdown.bind("submit", this._onDropdownSubmit, this);
-		this.dropdown.filterEl.blur(JW.Function(this._onDropdownBlur, this));
-		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
 	},
 	
 	_focusField: function() {
+		this._initDropdown();
 		this.dropdown.filterEl.focus();
 	},
 	
@@ -105,6 +93,25 @@
 		}
 		this._doneDropdown();
 		this.focusIn();
+	},
+	
+	_initDropdown: function() {
+		if (this.dropdown) {
+			return;
+		}
+		var options = this._createOptions();
+		var value = this._getMenuValue();
+		var index = JW.findBy(options, value);
+		this.dropdown = new wizard.view.editor.Dropdown({
+			options       : options,
+			selectedIndex : index
+		});
+		var offset = this.el.offset();
+		offset.top += this.el.outerHeight() + 3;
+		this.dropdown.el.offset(offset);
+		this.dropdown.bind("submit", this._onDropdownSubmit, this);
+		this.dropdown.filterEl.blur(JW.Function(this._onDropdownBlur, this));
+		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
 	},
 	
 	_doneDropdown: function() {

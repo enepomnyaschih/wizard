@@ -1,8 +1,8 @@
 ﻿wizard.lib.CollectionSyncher = JW.Syncher.extend({
 	/*
 	Required
-	JW.Collection<JW.UI.Component> target;
-	Subclass<JW.UI.Component> provider;
+	JW.Collection<Object> target;
+	Subclass<Object> provider;
 	
 	Optional
 	String dataField;

@@ -15,9 +15,6 @@
 	color: red;
 }
 .wizard-editor-element.wizard-focused {
-	color: white;
-	background-color: #3879D9;
-}
-.wizard-editor-element.wizard-focused.wizard-invalid {
-	color: white;
+	cursor: pointer;
+	background-color: #E8E8FF;
 }

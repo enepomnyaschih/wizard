@@ -46,6 +46,7 @@
 		"wizard/view/editor/base/form.jw.html : wizard.view.editor.Form",
 		"wizard/view/editor/base/line.js",
 		"wizard/view/editor/base/line.jw.html : wizard.view.editor.Line",
+		"wizard/view/editor/base/line/list.js",
 		"wizard/view/editor/base/menuelement.js",
 		"wizard/view/editor/base/menuoption.js",
 		"wizard/view/editor/classconstructorsform.js",

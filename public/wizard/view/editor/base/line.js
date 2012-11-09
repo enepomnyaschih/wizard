@@ -16,14 +16,16 @@
 			this.addChild(this.element, "item");
 			this.form = this.element.form;
 			this.element.bind("formchange", this._onElementFormChange, this);
+		} else {
+			this.
 		}
 		
-		this.children = new wizard.lib.SynchedComponent({
+		this.children = new wizard.view.editor.line.List({
 			renderParent   : this,
 			renderPosition : "children"
 		});
 		
-		this.listItems = new wizard.lib.SynchedComponent({
+		this.listItems = new wizard.view.editor.line.List({
 			renderParent   : this,
 			renderPosition : "list-items"
 		});
@@ -52,8 +54,8 @@
 			return;
 		}
 		this.addEl.css("display", this.form.listItems ? "" : "none");
-		this.children.setCollection(this.form.children);
-		this.listItems.setCollection(this.form.listItems);
+		this.children.setForms(this.form.children);
+		this.listItems.setForms(this.form.listItems);
 	},
 	
 	_doneForm: function() {
@@ -61,8 +63,10 @@
 			return;
 		}
 		this.addEl.css("display", "none");
-		this.children.setCollection(null);
-		this.listItems.setCollection(null);
+		this.children.setForms(null);
+		this.listItems.setForms(null);
 		delete this.form;
 	}
 });
+
+wizard.view.editor.line = {};

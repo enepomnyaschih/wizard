@@ -79,6 +79,15 @@
 			event.stopPropagation();
 			this.focus();
 		}
+	},
+	
+	_onFocus: function() {
+	},
+	
+	_focusField: function() {
+	},
+	
+	_onBlur: function() {
 	}
 });
 

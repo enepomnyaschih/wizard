@@ -23,7 +23,7 @@
 		this._initSyncher();
 	},
 	
-	_initSyncher: function(form) {
+	_initSyncher: function() {
 		if (!this.collection) {
 			return;
 		}

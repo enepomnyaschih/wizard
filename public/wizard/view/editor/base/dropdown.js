@@ -35,7 +35,6 @@
 	},
 	
 	destroyComponent: function() {
-		this._doneSelectedIndex();
 		this.syncher.destroy();
 		this.filterChangeListener.destroy();
 		this._super();
