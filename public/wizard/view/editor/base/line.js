@@ -17,7 +17,7 @@
 			this.form = this.element.form;
 			this.element.bind("formchange", this._onElementFormChange, this);
 		} else {
-			this.
+			this.addChild(this.form, "item");
 		}
 		
 		this.children = new wizard.view.editor.line.List({
@@ -35,8 +35,9 @@
 	
 	destroyComponent: function() {
 		this._doneForm();
-		this.element.purge(this);
-		
+		if (this.element) {
+			this.element.purge(this);
+		}
 		this._super();
 	},
 	
