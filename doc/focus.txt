@@ -1,0 +1,62 @@
+Структура = Structure(Element)
+<Element>
+	<List1>
+	<List2>
+Набор списков зависит от выбранного значения элемента (или от формы, в которую это значение раскрывается?).
+
+Список = List(Element)
+<Title> [+]
+	<Structure1> [-] [+]
+	<Structure2> [-] [+]
+
+Корень редактора - Structure(ClassDefinitionElement)
+
+ClassDefinitionElement = MenuElement, каждое значение имеет дочерний список, сводится к этому:
+	generic types = List(GenericTypeDefinitionElement)
+	implements = List(ClassElement)
+	fields = List(FieldDefinitionElement)
+	constructors = List(ConstructorDefinitionElement)
+	methods = List(MethodDefinitionElement)
+	static fields = List(StaticFieldDefinitionElement)
+	static methods = List(StaticMethodDefinitionElement)
+
+ConstructorDefinitionElement = FormElement, с дочерними списками:
+	arguments = List(ArgumentDefinitionElement)
+	variables = List(VariableDefinitionElement)
+	actions = List(ActionElement)
+
+MethodDefinitionElement = MenuElement, каждое значение имеет следующие дочерние списки:
+	arguments = List(ArgumentDefinitionElement)
+	variables = List(VariableDefinitionElement)
+	actions = List(ActionElement)
+
+StaticMethodDefinitionElement = FormElement, с дочерними списками:
+	arguments = List(ArgumentDefinitionElement)
+	variables = List(VariableDefinitionElement)
+	actions = List(ActionElement)
+
+ActionElement = MenuElement, некоторые значения имеют дочерние списки.
+Циклы:
+	variables = List(VariableDefinitionElement)
+	actions = List(ActionElement)
+
+Исходя их этого, можно заключить, что структуру задает корневая форма элемента.
+
+----------------
+Простые элементы:
+
+GenericTypeDefinitionElement = FormElement, без дочерних списков
+ClassElement = MenuElement, ни одно значение не имеет дочерних списков
+FieldDefinitionElement = FormElement, без дочерних списков
+ArgumentDefinitionElement = FormElement, без дочерних списков
+VariableDefinitionElement = FormElement, без дочерних списков
+StaticFieldDefinitionElement = FormElement, без дочерних списков
+
+----------------
+Как гуляет фокус
+
+Фокусить можно:
+- Отдельные элементы
+- Кнопки [+] и [-] в списке
+- Несколько структур в одном списке
+- Структура фокусится одновременно с ее элементом
