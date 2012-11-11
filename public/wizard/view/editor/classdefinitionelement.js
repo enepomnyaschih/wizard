@@ -1,4 +1,4 @@
-﻿wizard.view.editor.ClassContentElement = wizard.view.editor.MenuElement.extend({
+﻿wizard.view.editor.ClassDefinitionElement = wizard.view.editor.MenuElement.extend({
 	/*
 	Required
 	wizard.model.Class clazz;

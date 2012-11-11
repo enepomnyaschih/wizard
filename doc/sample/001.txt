@@ -1,0 +1,15 @@
+﻿[class] [newclass] in [(root)]
+ ^^^^^
+	generic types [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+	constructors [+]
+	methods [+]
+
+Меню:
+- interface
+- abstract class
+# class
+- final class
+- static class

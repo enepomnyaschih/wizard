@@ -1,0 +1,13 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[[-name-] extends [Class]] [-] [+]
+		  ^^^^^^
+	extends [Class]
+	implements [+]
+	fields [+]
+	constructors [+]
+	methods [+]
+
+Поле для ввода имени.
+
+T

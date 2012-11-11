@@ -1,0 +1,18 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[[public] [[Event]<[EventParams]>] [-name-] = [-value-]] [-] [+]
+		                    ^^^^^^^^^^^
+	constructors [+]
+	methods [+]
+
+Здесь показано, как работает двойная вложенность: [[-type-]] превращается в [[Event]<[EventParams]>]
+
+Меню:
+# com.wizard.js.core.CollectionItemEventParams
+- com.wizard.js.core.CollectionMoveEventParams
+- com.wizard.js.core.CollectionReplaceEventParams
+- com.wizard.js.core.EventParams

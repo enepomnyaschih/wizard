@@ -1,0 +1,16 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[[private] [[-type-]] [-name-] = [-value-]] [-] [+]
+		  ^^^^^^^
+	constructors [+]
+	methods [+]
+
+Меню:
+- private
+- protected
+# public
+- static

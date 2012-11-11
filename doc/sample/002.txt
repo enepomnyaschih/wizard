@@ -1,0 +1,12 @@
+﻿[class] [newclass] in [(root)]
+         ^^^^^^^^
+	generic types [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+	constructors [+]
+	methods [+]
+
+Поле для ввода имени.
+
+Collection

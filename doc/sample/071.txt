@@ -1,0 +1,67 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[public Event<CollectionItemEventParams<T>> addEvent = new Event<CollectionItemEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionItemEventParams<T>> removeEvent = new Event<CollectionItemEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionReplaceEventParams<T>> replaceEvent = new Event<CollectionReplaceEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionMoveEventParams<T>> moveEvent = new Event<CollectionMoveEventParams<T>>:default()] [-] [+]
+		[public Event<EventParams> clearEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> reorderEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> filterEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> resetEvent = new Event<EventParams>:default()] [-] [+]
+		[private Array<T> base = null] [-] [+]
+	constructors [+]
+		[default] [-] [+]
+			arguments [+]
+			variables [+]
+			actions [+]
+				[super:default()] [-] [+]
+				[(this.base = new Array<T>:default())] [-] [+]
+		[byArray] [-] [+]
+			arguments [+]
+				[Array<T> base] [-] [+]
+			variables [+]
+			actions [+]
+				[super:default()] [-] [+]
+				[(this.base = base)] [-] [+]
+	methods [+]
+		[override toString public regular string] [-] [+]
+			arguments
+			variables [+]
+			actions [+]
+				[return this.base.toString()] [-] [+]
+		[public regular void destroy] [-] [+]
+			arguments [+]
+			variables [+]
+			actions [+]
+				[this.addEvent.purge()] [-] [+]
+				[this.removeEvent.purge()] [-] [+]
+				[this.replaceEvent.purge()] [-] [+]
+				[this.moveEvent.purge()] [-] [+]
+				[this.clearEvent.purge()] [-] [+]
+				[this.reorderEvent.purge()] [-] [+]
+				[this.filterEvent.purge()] [-] [+]
+				[this.resetEvent.purge()] [-] [+]
+		[private regular T set] [-] [+]
+			arguments [+]
+				[number index] [-] [+]
+				[T item] [-] [+]
+			variables [+]
+				[T oldItem = this.base.get(index)] [-] [+]
+			actions [+]
+				[[[[this].[-field-]].[[-method-]()]]] [-] [+]
+				           ^^^^^^^
+
+Меню:
+- addEvent
+- removeEvent
+- replaceEvent
+- moveEvent
+- clearEvent
+- reorderEvent
+- filterEvent
+- resetEvent
+# base

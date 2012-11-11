@@ -1,11 +1,16 @@
 ﻿.wizard-editor div {
 	text-decoration: inherit;
 }
-.wizard-editor-line-add {
+.wizard-editor-indent {
+	padding-left: 10px;
+}
+.wizard-editor-plus {
+	background: transparent url(images/plus.png) no-repeat 0 0;
 	display: inline-block;
 }
-.wizard-editor-line-body {
-	padding-left: 10px;
+.wizard-editor-minus {
+	background: transparent url(images/minus.png) no-repeat 0 0;
+	display: inline-block;
 }
 .wizard-editor-element.wizard-collapsed {
 	color: blue;

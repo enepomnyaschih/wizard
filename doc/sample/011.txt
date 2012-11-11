@@ -1,0 +1,14 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[[public] [Event<CollectionItemEventParams<T>>] [-name-] = [null]] [-] [+]
+		                                                 ^^^^^^
+	constructors [+]
+	methods [+]
+
+Поле для ввода имени.
+
+addEvent

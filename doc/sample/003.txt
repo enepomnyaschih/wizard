@@ -1,0 +1,12 @@
+﻿[class] [Collection] in [(root)]
+                         ^^^^^^
+	generic types [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+	constructors [+]
+	methods [+]
+
+Меню:
+- com.wizard.js.lang
+# com.wizard.js.core

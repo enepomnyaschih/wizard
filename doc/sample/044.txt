@@ -1,0 +1,61 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[public Event<CollectionItemEventParams<T>> addEvent = new Event<CollectionItemEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionItemEventParams<T>> removeEvent = new Event<CollectionItemEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionReplaceEventParams<T>> replaceEvent = new Event<CollectionReplaceEventParams<T>>:default()] [-] [+]
+		[public Event<CollectionMoveEventParams<T>> moveEvent = new Event<CollectionMoveEventParams<T>>:default()] [-] [+]
+		[public Event<EventParams> clearEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> reorderEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> filterEvent = new Event<EventParams>:default()] [-] [+]
+		[public Event<EventParams> resetEvent = new Event<EventParams>:default()] [-] [+]
+		[private Array<T> base = null] [-] [+]
+	constructors [+]
+		[default] [-] [+]
+			arguments [+]
+			variables [+]
+			actions [+]
+				[super:default()] [-] [+]
+				[(this.base = new Array<T>:default())] [-] [+]
+		[byArray] [-] [+]
+			arguments [+]
+				[Array<T> base] [-] [+]
+			variables [+]
+			actions [+]
+				[super:default()] [-] [+]
+				[(this.base = base)] [-] [+]
+	methods [+]
+		[override toString public regular string] [-] [+]
+			arguments
+			variables [+]
+			actions [+]
+				[return this.base.toString()] [-] [+]
+		[[public] [regular] [-type-] [-name-]] [-] [+]
+		                     ^^^^^^
+			arguments [+]
+			variables [+]
+			actions [+]
+
+Меню:
+# void
+- number
+- string
+- boolean
+- T
+- com.wizard.js.lang.Class
+- com.wizard.js.lang.Number
+- com.wizard.js.lang.String
+- com.wizard.js.lang.Boolean
+- com.wizard.js.lang.Array
+- com.wizard.js.lang.Map
+- com.wizard.js.core.Collection
+- com.wizard.js.core.CollectionItemEventParams
+- com.wizard.js.core.CollectionMoveEventParams
+- com.wizard.js.core.CollectionReplaceEventParams
+- com.wizard.js.core.Event
+- com.wizard.js.core.EventAttachment
+- com.wizard.js.core.EventHandler
+- com.wizard.js.core.EventParams

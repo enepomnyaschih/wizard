@@ -12,6 +12,7 @@
 	Fields
 	Boolean focused;
 	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
+	JW.Collection<wizard.view.editor.List> lists;
 	
 	Abstract methods
 	void _onFocus();
@@ -23,6 +24,7 @@
 	
 	render: function() {
 		this._super();
+		this.lists = new JW.Collection();
 		this.validate();
 		this.el.click(JW.Function.inScope(this._onClick, this));
 	},

@@ -4,8 +4,8 @@
 	wizard.model.Class module;
 	
 	Fields
-	wizard.view.editor.ClassContentElement element;
-	wizard.view.editor.Line line;
+	wizard.view.editor.ClassDefinitionElement element;
+	wizard.view.editor.Structure structure;
 	wizard.view.Editor editor;
 	*/
 	
@@ -27,20 +27,17 @@
 		this.editor = new wizard.view.Editor({
 			model : this.model
 		});
-		
-		this.element = new wizard.view.editor.ClassContentElement({
+		this.element = new wizard.view.editor.ClassDefinitionElement({
 			model  : this.model,
 			clazz  : this.module,
 			editor : this.editor
 		});
-		
-		this.line = new wizard.view.editor.Line({
+		this.structure = new wizard.view.editor.Structure({
 			element        : this.element,
 			renderParent   : this,
-			renderPosition : "line"
+			renderPosition : "structure"
 		});
-		
-		this.editor.setRootElement(this.element);
+		this.editor.setRoot(this.structure);
 	},
 	
 	afterAppend: function() {

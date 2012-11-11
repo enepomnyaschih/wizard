@@ -1,0 +1,10 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+	               ^
+	extends [Class]
+	implements [+]
+	fields [+]
+	constructors [+]
+	methods [+]
+
+Кнопка.

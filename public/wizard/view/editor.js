@@ -16,7 +16,7 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	wizard.Model model;
 	
 	Fields
-	wizard.view.editor.Element rootElement;
+	wizard.view.editor.Structure root;
 	wizard.view.editor.Element focusedElement;
 	*/
 	
@@ -26,9 +26,9 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		this._super();
 	},
 	
-	setRootElement: function(element) {
-		// assert !this.rootElement;
-		this.rootElement = element;
+	setRoot: function(root) {
+		// assert !this.root;
+		this.root = root;
 	},
 	
 	findClickableElement: function(element) {

@@ -1,0 +1,25 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[[public] [Event<CollectionItemEventParams<T>>] [addEvent] = [null]] [-] [+]
+		                                                              ^^^^
+	constructors [+]
+	methods [+]
+
+Меню:
+- null
+- this
+- variable
+- call method
+- call superclass method
+- call static method
+- field
+- static field
+# new object
+- && operator (object)
+- || operator (object)
+- = operator (object)
+- ?: operator (object)

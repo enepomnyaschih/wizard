@@ -1,0 +1,32 @@
+﻿[class] [Collection] in [com.java2js.js.core]
+	generic types [+]
+		[T extends Class] [-] [+]
+	extends [Class]
+	implements [+]
+	fields [+]
+		[[public] [[-type-]] [-name-] = [-value-]] [-] [+]
+		            ^^^^^^
+	constructors [+]
+	methods [+]
+
+Двойная вложенность элемента, потому что [[-type-]] - это тип с указанием generic, а [-type-] - это тип еще без указания generic.
+
+Меню:
+- number
+- string
+- boolean
+- T
+- com.wizard.js.lang.Class
+- com.wizard.js.lang.Number
+- com.wizard.js.lang.String
+- com.wizard.js.lang.Boolean
+- com.wizard.js.lang.Array
+- com.wizard.js.lang.Map
+- com.wizard.js.core.Collection
+- com.wizard.js.core.CollectionItemEventParams
+- com.wizard.js.core.CollectionMoveEventParams
+- com.wizard.js.core.CollectionReplaceEventParams
+# com.wizard.js.core.Event
+- com.wizard.js.core.EventAttachment
+- com.wizard.js.core.EventHandler
+- com.wizard.js.core.EventParams
