@@ -10,7 +10,7 @@
 		
 		var self = this;
 		this.addEl.click(function() {
-			self.collection.createElement(self._getIndex() + 1);
+			self.collection.createItem(self._getIndex() + 1);
 		});
 		this.remEl.click(function() {
 			self.collection.removeItemAt(self._getIndex());

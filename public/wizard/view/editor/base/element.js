@@ -24,6 +24,7 @@
 	
 	render: function() {
 		this._super();
+		this.el.addClass("wizard-editor-element");
 		this.lists = new JW.Collection();
 		this.validate();
 		this.el.click(JW.Function.inScope(this._onClick, this));

@@ -22,7 +22,7 @@
 				title  : "(select)"
 			});
 		}
-		return new wizard.view.editor.ClassContentForm({
+		return new wizard.view.editor.ClassDefinitionForm({
 			editor : this.editor,
 			clazz  : this.clazz
 		});

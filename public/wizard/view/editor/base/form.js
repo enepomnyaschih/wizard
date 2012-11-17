@@ -4,20 +4,20 @@
 	wizard.view.Editor editor;
 	
 	Optional
-	string title;
+	String title;
 	
 	Fields
 	JW.Collection<wizard.view.editor.Element> elements;
-	JW.Collection<wizard.view.editor.Form> children;
-	JW.Collection<wizard.view.editor.Element> listItems;
+	JW.Collection<wizard.view.editor.List> lists;
 	*/
 	
 	isList : false,
 	
 	render: function() {
 		this._super();
+		this.el.addClass("wizard-editor-form");
 		this.elements = new JW.Collection(this._createElements());
-		this.children = new JW.Collection(this._createChildren());
+		this.lists = new JW.Collection(this._createLists());
 		if (this.title) {
 			this.el.text(this.title);
 		}
@@ -27,10 +27,7 @@
 		return [];
 	},
 	
-	_createChildren: function() {
+	_createLists: function() {
 		return [];
-	},
-	
-	_onAddClick: function() {
 	}
 });

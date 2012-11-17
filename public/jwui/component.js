@@ -395,7 +395,9 @@ JW.UI.Component = JW.ObservableConfig.extend({
             var jwId = anchorEl.attr("jwid");
             this[JW.String.camel(jwId) + "El"] = anchorEl;
             anchorEl.removeAttr("jwid");
-            anchorEl.addClass(this.getChildElClass(jwId));
+            if (this.jwClass) {
+                anchorEl.addClass(this.getChildElClass(jwId));
+            }
         }
     },
     

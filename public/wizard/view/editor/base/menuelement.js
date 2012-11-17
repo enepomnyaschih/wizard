@@ -48,12 +48,16 @@
 			element.parentElement = this;
 		}, this);
 		this.addChild(this.form);
+		this.form.lists.each(function(list) {
+			this.lists.addItem(list);
+		}, this);
 	},
 	
 	_doneForm: function() {
 		if (!this.form) {
 			return;
 		}
+		this.lists.clear();
 		this.form.destroy();
 		delete this.form;
 	},
