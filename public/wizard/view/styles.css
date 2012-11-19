@@ -1,49 +1,38 @@
-﻿button
-{
+﻿button {
 	margin: 0;
 }
-
-.clear
-{
+.clear {
 	clear: both;
 }
-
-.left
-{
+.left {
 	float: left;
 }
-
-.field
-{
+.field {
 	margin: 3px 0;
 }
-
-.label
-{
+.label {
 	float: left;
 }
-
-.wizard
-{
+.wizard {
 	font-family: sans-serif;
 	font-size: 10pt;
 }
-
 .wizard-component,
-.wizard-component div
-{
+.wizard-component div {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	cursor: default;
 }
-
-.wizard-module
-{
+.wizard-module {
 	border: 1px solid black;
 	height: 600px;
 	margin-left: 10px;
 	padding: 5px;
 	width: 600px;
 }
-
+.wizard-dummy-input {
+	display: block;
+	left: -10000px;
+	position: absolute;
+}

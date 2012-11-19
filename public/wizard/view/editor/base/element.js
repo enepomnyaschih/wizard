@@ -1,23 +1,28 @@
-﻿wizard.view.editor.Element = JW.UI.Component.extend({
-	/*
+﻿/*
+interface IFocusable extends IObservable {
 	Events
 	focus(JW.Event event);
+	blur(JW.Event event);
 	
+	Fields
+	Boolean focused;
+	
+	Methods
+	void doFocus();
+}
+*/
+
+wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
+	/*
 	Required
 	wizard.view.Editor editor;
 	
 	Optional
-	wizard.view.editor.MenuElement parentElement;
+	wizard.view.editor.FormElement parentElement;
+	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
 	
 	Fields
-	Boolean focused;
-	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
 	JW.Collection<wizard.view.editor.List> lists;
-	
-	Abstract methods
-	void _onFocus();
-	void _focusField();
-	view _onBlur();
 	*/
 	
 	focused : false,
@@ -26,8 +31,8 @@
 		this._super();
 		this.el.addClass("wizard-editor-element");
 		this.lists = new JW.Collection();
+		this._updateExpanded();
 		this.validate();
-		this.el.click(JW.Function.inScope(this._onClick, this));
 	},
 	
 	destroyComponent: function() {
@@ -44,25 +49,24 @@
 	},
 	
 	focus: function() {
-		if (this.editor._lock) {
-			return;
-		}
-		if (!this.focused) {
-			this.editor.onFocus(this);
-			this.focused = true;
-			this._updateFocused();
-			this._onFocus();
-		}
-		this._focusField();
+		this.editor.issueFocus(this);
 	},
 	
 	onBlur: function() {
-		if (!this.focused) {
+		this._setFocused(false);
+	},
+	
+	_setFocused: function(value) {
+		value = Boolean(value);
+		if (this.focused === value) {
 			return;
 		}
-		this.focused = false;
+		if (value) {
+			this.editor.onFocus(this);
+		}
+		this.focused = value;
 		this._updateFocused();
-		this._onBlur();
+		this.trigger(value ? "focus" : "blur");
 	},
 	
 	_isValid: function() {
@@ -75,22 +79,6 @@
 	
 	_updateExpanded: function() {
 		this.el.toggleClass("wizard-collapsed", !this.expanded);
-	},
-	
-	_onClick: function(event) {
-		if (this.ctrlKey || !this.parentElement || this.parentElement.expanded) {
-			event.stopPropagation();
-			this.focus();
-		}
-	},
-	
-	_onFocus: function() {
-	},
-	
-	_focusField: function() {
-	},
-	
-	_onBlur: function() {
 	}
 });
 

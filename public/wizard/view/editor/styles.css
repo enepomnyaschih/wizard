@@ -4,13 +4,27 @@
 .wizard-editor-indent {
 	padding-left: 10px;
 }
-.wizard-editor-plus {
+div.wizard-editor-plus {
 	background: transparent url(images/plus.png) no-repeat 0 0;
+	cursor: pointer;
 	display: inline-block;
+	height: 12px;
+	margin: 0 5px;
+	width: 12px;
 }
-.wizard-editor-minus {
+div.wizard-editor-minus {
 	background: transparent url(images/minus.png) no-repeat 0 0;
+	cursor: pointer;
 	display: inline-block;
+	height: 12px;
+	margin: 0 5px;
+	width: 12px;
+}
+.wizard-picker-warning {
+	background: transparent url(images/warning.png) no-repeat 0 0;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
 }
 .wizard-editor-element.wizard-collapsed {
 	color: blue;
@@ -22,4 +36,18 @@
 .wizard-editor-element.wizard-focused {
 	cursor: pointer;
 	background-color: #E8E8FF;
+}
+.wizard-editor-text-element {
+	border: 1px black solid;
+	display: inline-block;
+	height: 20px;
+	padding: 1px;
+}
+.wizard-editor-text-element-input {
+	border: none;
+	font-family: monospace;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: top;
 }

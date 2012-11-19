@@ -1,9 +1,8 @@
 ﻿/*
 	Focus model public interface:
 	wizard.view.editor.Element:focus;
-	wizard.view.editor.MenuElement:focusIn;
+	wizard.view.editor.ContainerElement:focusIn;
 	wizard.view.Editor:blur;
-	wizard.view.Editor:issueBlur;
 	wizard.view.Editor:focusNext;
 	wizard.view.Editor:focusPrev;
 	
@@ -21,7 +20,6 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	*/
 	
 	destroy: function() {
-		clearTimeout(this._blurTimer);
 		this.blur();
 		this._super();
 	},
@@ -31,16 +29,7 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		this.root = root;
 	},
 	
-	findClickableElement: function(element) {
-		while (element.parentElement && !element.parentElement.expanded) {
-			element = element.parentElement;
-		}
-		return element;
-	},
-	
 	onFocus: function(element) {
-		clearTimeout(this._blurTimer);
-		this._lock = true;
 		if (this.focusedElement) {
 			this.focusedElement.onBlur();
 		}
@@ -49,44 +38,36 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		this._collapse(rootElement);
 		JW.eachByMethod(branch, "setExpanded", [ true ]);
 		this.focusedElement = element;
-		delete this._lock;
 	},
 	
 	blur: function() {
-		clearTimeout(this._blurTimer);
-		if (!this.focusedElement || this._lock) {
+		if (this._focusTimer) {
+			clearTimeout(this._focusTimer);
+			delete this._focusTimer;
+		}
+		if (!this.focusedElement) {
 			return;
 		}
-		this._lock = true;
 		this.focusedElement.onBlur();
 		this._collapse();
 		delete this.focusedElement;
-		delete this._lock;
 	},
 	
-	issueBlur: function() {
-		if (this._lock || this._blurTimer) {
-			return;
-		}
-		this._blurTimer = setTimeout(JW.Function(this.blur, this), 1);
+	focusNext: function(element) {
 	},
 	
-	focusNext: function() {
-		clearTimeout(this._blurTimer);
-		if (this._lock) {
-			return;
-		}
-		this._lock = true;
-		delete this._lock;
+	focusPrev: function(element) {
 	},
 	
-	focusPrev: function() {
-		clearTimeout(this._blurTimer);
-		if (this._lock) {
-			return;
+	issueFocus: function(element) {
+		if (this._focusTimer) {
+			clearTimeout(this._focusTimer);
 		}
-		this._lock = true;
-		delete this._lock;
+		this._focusTimer = setTimeout(function() {
+			if (element.el) {
+				element.doFocus();
+			}
+		}, 1);
 	},
 	
 	_getExpandingBranch: function(element) {

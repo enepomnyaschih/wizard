@@ -13,7 +13,7 @@
 		this._super();
 		
 		this.deleteEl.click(JW.Function.inScope(this._onDeleteClick, this));
-		
+		/*
 		this.namePicker = new wizard.view.picker.Name({
 			validator      : JW.Function.inScope(this._validateName, this),
 			applier        : JW.Function.inScope(this._applyName, this),
@@ -21,7 +21,7 @@
 			renderParent   : this,
 			renderPosition : "name-picker"
 		});
-		
+		*/
 		this.el.find(".label").css("width", "100px");
 		
 		this.editor = new wizard.view.Editor({
@@ -42,7 +42,7 @@
 	
 	afterAppend: function() {
 		this._super();
-		this.namePicker.focus();
+		//this.namePicker.focus();
 	},
 	
 	destroyComponent: function() {

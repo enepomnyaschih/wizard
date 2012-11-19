@@ -15,6 +15,7 @@
 		var elements = [];
 		elements.push(new wizard.view.editor.TextElement({
 			editor         : this.editor,
+			value          : this.clazz.name,
 			applier        : this._applyName,
 			scope          : this,
 			renderParent   : this,
