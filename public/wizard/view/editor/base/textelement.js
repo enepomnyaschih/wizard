@@ -1,17 +1,17 @@
 ﻿wizard.view.editor.TextElement = wizard.view.editor.Element.extend({
 	/*
+	Required
+	void applier(String value);
+	Object scope;
+	
 	Optional
 	String value;
+	String validator(String value);
 	
 	Fields
-	String _initialValue;
-	String _currentValue;
+	String _editValue;
 	Integer _changeTimer;
 	Boolean _valid;
-	
-	Abstract methods
-	String validator(String value);
-	void applier(String value);
 	*/
 	
 	value  : "",
@@ -19,20 +19,11 @@
 	
 	render: function() {
 		this._super();
-		
-		this.inputEl.val(this.value);
-		this._updateInput();
-		this._updateValid();
-		
-		this.inputEl.bind("focus", JW.Function.inScope(this._onInputFocus, this));
-		this.inputEl.bind("blur", JW.Function.inScope(this._onInputBlur, this));
+		this.textEl.text(this.value);
 		this.inputEl.bind("change", JW.Function.inScope(this._testChange, this));
 		this.inputEl.bind("keydown", JW.Function.inScope(this._onKeyDown, this));
-		this.inputEl.bind("mouseup", function(event) { event.preventDefault(); });
-	},
-	
-	doFocus: function() {
-		this.inputEl.focus();
+		this.textEl.click(JW.Function.inScope(this._selectClickHandler, this));
+		this.inputBoxEl.click(JW.Function.inScope(this._blockClickHandler, this));
 	},
 	
 	_commit: function() {
@@ -40,24 +31,9 @@
 			return;
 		}
 		this.value = this._editValue;
-		this.applier(this.value);
+		this.textEl.text(this.value);
+		this.applier.call(this.scope || this, this.value);
 		this._endEdit();
-	},
-	
-	_revert: function() {
-		if (!this._changeTimer) {
-			return;
-		}
-		this.inputEl.val(this._initialValue);
-		this._endEdit();
-	},
-	
-	_onInputFocus: function() {
-		this._setFocused(true);
-	},
-	
-	_onInputBlur: function() {
-		this._setFocused(false);
 	},
 	
 	_updateFocused: function() {
@@ -70,9 +46,8 @@
 			}
 			if (this._valid) {
 				this._commit();
-			} else {
-				this._revert();
 			}
+			this._endEdit();
 		}
 	},
 	
@@ -88,14 +63,14 @@
 		if (this._changeTimer) {
 			return;
 		}
+		this.textEl.hide();
+		this.inputBoxEl.show();
 		this.inputEl.val(this.value);
+		this.inputEl.focus();
 		this.inputEl.select();
-		this._initialValue = this.value;
-		this._editValue = this._initialValue;
+		this._editValue = null;
+		this._testChange();
 		this._changeTimer = setInterval(JW.Function.inScope(this._testChange, this), 10);
-		this._valid = true;
-		this._updateInput();
-		this._updateValid();
 	},
 	
 	_endEdit: function() {
@@ -103,13 +78,11 @@
 			return;
 		}
 		clearInterval(this._changeTimer);
-		delete this._initialValue;
 		delete this._editValue;
 		delete this._changeTimer;
 		delete this._valid;
-		this.inputEl.blur();
-		this._updateInput();
-		this._updateValid();
+		this.inputBoxEl.hide();
+		this.textEl.show();
 	},
 	
 	_testChange: function() {
@@ -118,21 +91,16 @@
 			return;
 		}
 		this._editValue = value;
-		this._updateInput();
+		this.inputEl.attr("size", value.length + 1);
 		
-		var message = this.validator(value);
+		var message;
+		if (this.validator) {
+			message = this.validator.call(this.scope || this, value);
+		}
 		this._valid = !message;
-		this._updateValid();
+		this.iconEl.css("display", this._valid ? "none" : "");
 		if (!this._valid) {
 			this.iconEl.attr("title", message);
 		}
-	},
-	
-	_updateInput: function() {
-		this.inputEl.attr("size", this.inputEl.val().length + 1);
-	},
-	
-	_updateValid: function() {
-		this.iconEl.css("display", this._valid ? "none" : "");
 	}
 });

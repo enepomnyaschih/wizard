@@ -20,10 +20,11 @@ div.wizard-editor-minus {
 	margin: 0 5px;
 	width: 12px;
 }
-.wizard-picker-warning {
+.wizard-editor-warning {
 	background: transparent url(images/warning.png) no-repeat 0 0;
 	display: inline-block;
 	height: 16px;
+	vertical-align: top;
 	width: 16px;
 }
 .wizard-editor-element.wizard-collapsed {
@@ -37,7 +38,7 @@ div.wizard-editor-minus {
 	cursor: pointer;
 	background-color: #E8E8FF;
 }
-.wizard-editor-text-element {
+.wizard-editor-text-element-input-box {
 	border: 1px black solid;
 	display: inline-block;
 	height: 20px;

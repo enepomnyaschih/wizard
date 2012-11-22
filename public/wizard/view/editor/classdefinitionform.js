@@ -16,6 +16,7 @@
 		elements.push(new wizard.view.editor.TextElement({
 			editor         : this.editor,
 			value          : this.clazz.name,
+			validator      : this._validateName,
 			applier        : this._applyName,
 			scope          : this,
 			renderParent   : this,
@@ -115,5 +116,23 @@
 			}));
 		}
 		return lists;
+	},
+	
+	_validateName: function(name) {
+		if (!wizard.view.editor.ClassDefinitionForm.nameRegex.test(name)) {
+			return "Invalid class name. Must contain liters and numbers only, must start from higher case liter.";
+		}
+		var isFree = this.clazz.parent.classes.every(function(sibling) {
+			return (sibling === this.clazz) || (sibling.name !== name);
+		}, this);
+		if (!isFree) {
+			return "Class with such name exists already.";
+		}
+	},
+	
+	_applyName: function(name) {
+		this.clazz.setName(name);
 	}
 });
+
+wizard.view.editor.ClassDefinitionForm.nameRegex = /^[A-Z][A-Za-z0-9]*$/;

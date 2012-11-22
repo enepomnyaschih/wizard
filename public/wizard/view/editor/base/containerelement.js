@@ -13,16 +13,12 @@
 	render: function() {
 		this._super();
 		this._initForm();
-		this.el.click(JW.Function.inScope(this._onClick, this));
+		this.el.click(JW.Function.inScope(this._selectClickHandler, this));
 	},
 	
 	destroyComponent: function() {
 		this._doneForm();
 		this._super();
-	},
-	
-	doFocus: function() {
-		this._setFocused(true);
 	},
 	
 	focusIn: function() {
@@ -61,15 +57,5 @@
 		this.lists.clear();
 		this.form.destroy();
 		delete this.form;
-	},
-	
-	_onClick: function(event) {
-		if (event._skipFocus) {
-			return;
-		}
-		if (event.ctrlKey || !this.parentElement || this.parentElement.expanded) {
-			this.focus();
-			event._skipFocus = true;
-		}
 	}
 });

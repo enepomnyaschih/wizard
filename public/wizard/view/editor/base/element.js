@@ -6,9 +6,6 @@ interface IFocusable extends IObservable {
 	
 	Fields
 	Boolean focused;
-	
-	Methods
-	void doFocus();
 }
 */
 
@@ -29,6 +26,7 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	
 	render: function() {
 		this._super();
+		wizard.view.editor.Element.init();
 		this.el.addClass("wizard-editor-element");
 		this.lists = new JW.Collection();
 		this._updateExpanded();
@@ -56,6 +54,10 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 		this._setFocused(false);
 	},
 	
+	doFocus: function() {
+		this._setFocused(true);
+	},
+	
 	_setFocused: function(value) {
 		value = Boolean(value);
 		if (this.focused === value) {
@@ -79,7 +81,32 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	
 	_updateExpanded: function() {
 		this.el.toggleClass("wizard-collapsed", !this.expanded);
+	},
+	
+	_selectClickHandler: function(event) {
+		if (wizard.view.editor.Element._skipClickFocus) {
+			return;
+		}
+		if (event.ctrlKey || !this.parentElement || this.parentElement.expanded) {
+			this.focus();
+			wizard.view.editor.Element._skipClickFocus = true;
+		}
+	},
+	
+	_blockClickHandler: function(event) {
+		wizard.view.editor.Element._skipClickFocus = true;
 	}
 });
 
 wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "expanded", false);
+
+wizard.view.editor.Element.init = function() {
+	var self = wizard.view.editor.Element;
+	if (self._initialized) {
+		return;
+	}
+	self._initialized = true;
+	JW.UI.bodyEl.click(function() {
+		delete self._skipClickFocus;
+	});
+}
