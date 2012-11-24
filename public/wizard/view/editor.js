@@ -69,6 +69,26 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	},
 	
 	focusNext: function(element) {
+		if (!element.parentElement) {
+			this.blur();
+			return;
+		}
+		var found = false;
+		var nextElement;
+		element.parentElement.form.elements.some(function(child) {
+			if (found) {
+				nextElement = child;
+				return true;
+			}
+			if (child === element) {
+				found = true;
+			}
+		}, this);
+		if (nextElement) {
+			nextElement.focus();
+		} else {
+			this.focusNext(element.parentElement);
+		}
 	},
 	
 	focusPrev: function(element) {

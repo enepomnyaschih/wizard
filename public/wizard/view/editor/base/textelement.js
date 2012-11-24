@@ -59,9 +59,20 @@
 	
 	_onKeyDown: function(event) {
 		switch (event.which) {
-			case 13: this._commit(); break;
-			case 27: this._revert(); break;
-			default: this._testChange();
+			case 9:
+				this.editor.focusNext(this);
+				break;
+			case 13:
+				this._commit();
+				if (this._valid) {
+					this.editor.focusNext(this);
+				}
+				break;
+			case 27:
+				this._revert();
+				break;
+			default:
+				this._testChange();
 		}
 	},
 	
