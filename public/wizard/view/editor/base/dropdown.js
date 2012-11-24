@@ -31,7 +31,7 @@
 			scope      : this
 		});
 		this._initSelectedIndex();
-		this._setSelectedIndex(this._adjustSelection());
+		this._selectNext();
 	},
 	
 	destroyComponent: function() {
@@ -64,6 +64,18 @@
 	
 	_onFilterKeyDown: function(event) {
 		switch (event.which) {
+			case 38: // up
+				this._selectPrev();
+				break;
+			case 40: // down
+				this._selectNext();
+				break;
+			case 13: // enter
+				var option = this.getSelectedOption();
+				if (option) {
+					this.trigger("submit", option);
+				}
+				break;
 		}
 	},
 	
@@ -81,15 +93,26 @@
 		return false;
 	},
 	
-	_adjustSelection: function() {
-		var start = (this.selectedIndex === -1) ? 0 : this.selectedIndex;
-		for (var shift = 0; shift < this.plainChildren.length; ++shift) {
-			var index = (start + shift) % this.plainChildren.length;
-			var child = this.plainChildren[index];
-			if (child.available)
-				return index;
+	_selectNext: function() {
+		for (var index = this.selectedIndex + 1; index < this.plainChildren.length; ++index) {
+			if (this.plainChildren[index].available) {
+				this._setSelectedIndex(index);
+				return;
+			}
 		}
-		return -1;
+	},
+	
+	_selectPrev: function() {
+		if (this.selectedIndex === -1) {
+			this._selectNext();
+			return;
+		}
+		for (var index = this.selectedIndex - 1; index >= 0; --index) {
+			if (this.plainChildren[index].available) {
+				this._setSelectedIndex(index);
+				return;
+			}
+		}
 	},
 	
 	_setSelectedIndex: function(value) {
