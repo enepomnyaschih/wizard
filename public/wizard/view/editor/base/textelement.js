@@ -60,6 +60,7 @@
 	_onKeyDown: function(event) {
 		switch (event.which) {
 			case 9:
+				event.preventDefault();
 				this.editor.focusNext(this);
 				break;
 			case 13:

@@ -56,19 +56,34 @@
 	},
 	
 	_onFilterChange: function(event, value) {
+		var someAvailable = false;
 		JW.each(this.plainChildren, function(optionView) {
-			optionView.setAvailable(this._isAvailable(optionView.option.value, value));
+			var available = this._isAvailable(optionView.option.label, value);
+			optionView.setAvailable(available);
+			someAvailable = someAvailable || available;
 		}, this);
-		this._setSelectedIndex(this._adjustSelection());
+		if (someAvailable) {
+			var option = this.getSelectedOption();
+			if (!option || !option.available) {
+				this._selectNext();
+			}
+		} else {
+			this._setSelectedIndex(-1);
+		}
 	},
 	
 	_onFilterKeyDown: function(event) {
 		switch (event.which) {
 			case 38: // up
+				event.preventDefault();
 				this._selectPrev();
 				break;
 			case 40: // down
+				event.preventDefault();
 				this._selectNext();
+				break;
+			case 27: // esc
+				this.filterEl.val("");
 				break;
 			case 13: // enter
 				var option = this.getSelectedOption();
