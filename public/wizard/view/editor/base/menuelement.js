@@ -67,6 +67,7 @@
 		}
 		if (option.value !== this._getMenuValue()) {
 			option.applier.call(option.scope, option);
+			this.validate();
 		}
 		this._doneDropdown();
 		this.focusIn();

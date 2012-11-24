@@ -33,7 +33,16 @@
 		this.value = this._editValue;
 		this.textEl.text(this.value);
 		this.applier.call(this.scope || this, this.value);
-		this._endEdit();
+		this.inputEl.select();
+	},
+	
+	_revert: function() {
+		if (!this._changeTimer) {
+			return;
+		}
+		this.inputEl.val(this.value);
+		this._testChange();
+		this.inputEl.select();
 	},
 	
 	_updateFocused: function() {
@@ -41,9 +50,6 @@
 		if (this.focused) {
 			this._beginEdit();
 		} else {
-			if (!this._changeTimer) {
-				return;
-			}
 			if (this._valid) {
 				this._commit();
 			}
