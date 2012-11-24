@@ -38,6 +38,10 @@ wizard.model.Pack = wizard.model.Module.extend({
 		return this.packs.isEmpty() && this.classes.isEmpty();
 	},
 	
+	getLabel: function() {
+		return this.isRoot() ? "(root)" : this.getFullName();
+	},
+	
 	newPack: function() {
 		var pack = new wizard.model.Pack({
 			name   : this.packs.generateName(),
@@ -54,6 +58,13 @@ wizard.model.Pack = wizard.model.Module.extend({
 		});
 		this.classes.addItem(clazz);
 		return clazz;
+	},
+	
+	everyPack: function(callback, scope) {
+		if (callback.call(scope || this, this) === false) {
+			return false;
+		}
+		return JW.everyByMethod(this.packs, "everyPack", [ callback, scope ]);
 	}
 });
 

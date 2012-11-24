@@ -25,6 +25,7 @@
 		elements.push(new wizard.view.editor.PackPickerElement({
 			editor         : this.editor,
 			applier        : this._applyPack,
+			value          : this.clazz.parent,
 			scope          : this,
 			renderParent   : this,
 			renderPosition : "pack"
@@ -132,6 +133,14 @@
 	
 	_applyName: function(name) {
 		this.clazz.setName(name);
+	},
+	
+	_applyPack: function(pack) {
+		if (pack === this.clazz.parent) {
+			return;
+		}
+		this.clazz.parent.classes.removeItem(this);
+		pack.classes.addItem(this);
 	}
 });
 

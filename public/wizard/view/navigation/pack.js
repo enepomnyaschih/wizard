@@ -49,7 +49,7 @@
 	},
 	
 	_getLabel: function() {
-		return this.module.isRoot() ? "(root)" : this.module.getFullName();
+		return this.module.getLabel();
 	},
 	
 	_onMouseDown: function(event) {
