@@ -14,6 +14,7 @@
 		this._super();
 		this.el.addClass("wizard-editor-container-element");
 		this._initForm();
+		this.el.mousedown(JW.Function.inScope(this._preventMouseDownHandler, this));
 		this.el.click(JW.Function.inScope(this._selectClickHandler, this));
 	},
 	

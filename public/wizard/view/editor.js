@@ -18,15 +18,19 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	wizard.view.editor.Structure root;
 	wizard.view.editor.Element focusedElement;
 	Function _bodyClickHandler;
+	Function _bodyMouseDownHandler;
 	Boolean _skipClickFocus;
+	Boolean _activateMouseDown;
 	*/
 	
-	_skipClickFocus : false,
+	_skipClickFocus    : false,
+	_activateMouseDown : false,
 	
 	destroy: function() {
 		this.blur();
 		if (this.root) {
 			JW.UI.bodyEl.unbind("click", this._bodyClickHandler);
+			JW.UI.bodyEl.unbind("mousedown", this._bodyMouseDownHandler);
 		}
 		this._super();
 	},
@@ -37,7 +41,9 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		}
 		this.root = root;
 		this._bodyClickHandler = JW.Function.inScope(this._onBodyClick, this);
+		this._bodyMouseDownHandler = JW.Function.inScope(this._onBodyMouseDown, this);
 		JW.UI.bodyEl.bind("click", this._bodyClickHandler);
+		JW.UI.bodyEl.bind("mousedown", this._bodyMouseDownHandler);
 	},
 	
 	onFocus: function(element) {
@@ -116,6 +122,17 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		}, 1);
 	},
 	
+	activateMouseDown: function() {
+		if (this._activateMouseDown) {
+			return;
+		}
+		this._activateMouseDown = true;
+		var self = this;
+		setTimeout(function() {
+			self._activateMouseDown = false;
+		}, 1);
+	},
+	
 	_getExpandingBranch: function(element) {
 		var branch = [];
 		if (element.expanded) {
@@ -143,6 +160,12 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 			this._skipClickFocus = false;
 		} else {
 			this.blur();
+		}
+	},
+	
+	_onBodyMouseDown: function(event) {
+		if (this._activateMouseDown) {
+			this._activateMouseDown = false;
 		}
 	}
 });

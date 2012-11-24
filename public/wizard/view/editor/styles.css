@@ -4,46 +4,41 @@
 .wizard-editor-indent {
 	padding-left: 10px;
 }
-div.wizard-editor-plus {
-	background: transparent url(images/plus.png) no-repeat 0 0;
+div.wizard-editor-button {
+	background: transparent none no-repeat 0 0;
 	cursor: pointer;
 	display: inline-block;
 	height: 12px;
-	margin: 0 5px;
+	margin: 0 5px -2px;
 	width: 12px;
 }
+div.wizard-editor-plus {
+	background-image: url(images/plus.png);
+}
 div.wizard-editor-minus {
-	background: transparent url(images/minus.png) no-repeat 0 0;
-	cursor: pointer;
-	display: inline-block;
-	height: 12px;
-	margin: 0 5px;
-	width: 12px;
+	background-image: url(images/minus.png);
 }
 .wizard-editor-element.wizard-collapsed {
 	color: blue;
-	cursor: pointer;
 }
 .wizard-editor-element.wizard-collapsed.wizard-invalid {
 	color: red;
 }
-.wizard-editor-container-element.wizard-focused {
+.wizard-editor-container-element {
 	cursor: pointer;
+}
+.wizard-editor-container-element.wizard-focused {
 	background-color: #E8E8FF;
 }
 .wizard-editor-text-element-input-box {
 	display: inline-block;
-	/*height: 20px;
-	padding: 1px;*/
 	white-space: nowrap;
 }
 .wizard-editor-text-element-input {
 	border: none;
-	/*font-family: monospace;*/
 	margin: 0;
 	outline: 0;
 	padding: 0;
-	/*vertical-align: top;*/
 }
 .wizard-editor-text-element-warning-icon {
 	background: transparent url(images/warning.png) no-repeat 0 0;

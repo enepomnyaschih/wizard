@@ -9,6 +9,7 @@
 	
 	render: function() {
 		this._super();
+		this.element.parentStructure = this;
 		this.addChild(this.element, "element");
 		this.lists = new wizard.lib.SynchedComponent({
 			collection     : this.element.lists,

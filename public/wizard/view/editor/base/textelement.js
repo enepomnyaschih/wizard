@@ -20,8 +20,9 @@
 	render: function() {
 		this._super();
 		this.textEl.text(this.value);
-		this.inputEl.bind("change", JW.Function.inScope(this._testChange, this));
-		this.inputEl.bind("keydown", JW.Function.inScope(this._onKeyDown, this));
+		this.inputEl.change(JW.Function.inScope(this._testChange, this));
+		this.inputEl.keydown(JW.Function.inScope(this._onKeyDown, this));
+		this.inputEl.mousedown(JW.Function.inScope(this._activateMouseDownHandler, this));
 		this.textEl.click(JW.Function.inScope(this._selectClickHandler, this));
 		this.inputBoxEl.click(JW.Function.inScope(this._blockClickHandler, this));
 	},

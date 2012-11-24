@@ -15,8 +15,12 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	wizard.view.Editor editor;
 	
 	Optional
-	wizard.view.editor.FormElement parentElement;
+	wizard.view.editor.ContainerElement parentElement;
 	Boolean expanded; // Element is expanded <=> Element is focused or one of its children is expanded
+	
+	At least one of next 2 fields must be defined   // TODO: Refactor
+	wizard.view.editor.Structure parentStructure;
+	wizard.view.editor.List parentList;
 	
 	Fields
 	JW.Collection<wizard.view.editor.List> lists;
@@ -94,6 +98,16 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	
 	_blockClickHandler: function(event) {
 		this.editor.skipClickFocus();
+	},
+	
+	_preventMouseDownHandler: function(event) {
+		if (!this.editor._activateMouseDown) {
+			event.preventDefault()
+		}
+	},
+	
+	_activateMouseDownHandler: function(event) {
+		this.editor.activateMouseDown();
 	}
 });
 
