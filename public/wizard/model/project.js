@@ -13,6 +13,16 @@
 		var result = [];
 		this.rootPack.everyPack(function(pack) {
 			result.push(pack);
+			return true;
+		}, this);
+		return result;
+	},
+	
+	getAllClasses: function() {
+		var result = [];
+		this.rootPack.everyClass(function(clazz) {
+			result.push(clazz);
+			return true;
 		}, this);
 		return result;
 	}

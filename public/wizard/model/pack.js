@@ -64,7 +64,12 @@ wizard.model.Pack = wizard.model.Module.extend({
 		if (callback.call(scope || this, this) === false) {
 			return false;
 		}
-		return JW.everyByMethod(this.packs, "everyPack", [ callback, scope ]);
+		return this.packs.everyByMethod("everyPack", [ callback, scope ]);
+	},
+	
+	everyClass: function(callback, scope) {
+		return this.classes.every(callback, scope) &&
+		       this.packs.everyByMethod("everyClass", [ callback, scope ]);
 	}
 });
 

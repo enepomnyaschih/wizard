@@ -30,10 +30,11 @@
 			renderParent   : this,
 			renderPosition : "pack"
 		}));
-		/*if (kind.extendz) {
+		if (kind.extendz) {
 			elements.push(new wizard.view.editor.ClassPickerElement({
 				editor         : this.editor,
 				applier        : this._applyExtends,
+				value          : this.clazz.extendz,
 				scope          : this,
 				renderParent   : this,
 				renderPosition : "extends"
@@ -41,7 +42,7 @@
 		} else {
 			this.removeEl("extends");
 			this.removeEl("extends-box");
-		}*/
+		}
 		return elements;
 	},
 	
@@ -141,6 +142,9 @@
 		}
 		this.clazz.parent.classes.removeItem(this);
 		pack.classes.addItem(this);
+	},
+	
+	_applyExtends: function(clazz) {
 	}
 });
 
