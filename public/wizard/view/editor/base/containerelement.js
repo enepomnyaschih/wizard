@@ -12,6 +12,7 @@
 	
 	render: function() {
 		this._super();
+		this.el.addClass("wizard-editor-container-element");
 		this._initForm();
 		this.el.click(JW.Function.inScope(this._selectClickHandler, this));
 	},

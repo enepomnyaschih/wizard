@@ -97,16 +97,21 @@
 			return;
 		}
 		this._editValue = value;
-		this.inputEl.attr("size", value.length + 1);
+		
+		this.dummyEl.text(value);
+		var width = this.dummyEl.width();
+		this.inputEl.width(width + 10);
 		
 		var message;
 		if (this.validator) {
 			message = this.validator.call(this.scope || this, value);
 		}
 		this._valid = !message;
-		this.iconEl.css("display", this._valid ? "none" : "");
+		this.warningIconEl.css("display", this._valid ? "none" : "");
 		if (!this._valid) {
-			this.iconEl.attr("title", message);
+			this.warningIconEl.attr("title", message);
+			width += 16;
 		}
+		this.inputBoxEl.width(width);
 	}
 });
