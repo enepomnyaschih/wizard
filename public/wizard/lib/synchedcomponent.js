@@ -34,7 +34,8 @@
 			collection : this.collection,
 			creator    : this.creator,
 			destroyer  : this.destroyer,
-			scope      : this
+			scope      : this.scope || this,
+			target     : this
 		});
 	},
 	

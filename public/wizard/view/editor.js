@@ -76,8 +76,69 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	
 	focusNext: function(element) {
 		if (!element.parentElement) {
-			this.blur();
-			return;
+			var structure, list;
+			if (element.parentStructure) {
+				var firstList = element.parentStructure.lists.plainChildren[0];
+				if (firstList) {
+					firstList.addElement.focus();
+					return;
+				}
+				structure = element.parentStructure;
+			} else if (element.parentList) {
+				var firstChild = element.parentList.plainChildren[0];
+				if (firstChild) {
+					firstChild.element.focus();
+					return;
+				}
+				list = element.parentList;
+			} else {
+				throw new Error("Element which doesn't have parent list or structure detected");
+			}
+			while (true) {
+				if (structure) {
+					if (!structure.parentList) {
+						this.blur();
+						return;
+					}
+					var found = false;
+					var nextStructure;
+					JW.some(structure.parentList.plainChildren, function(child) {
+						if (found) {
+							nextStructure = child;
+							return true;
+						}
+						if (child === structure) {
+							found = true;
+						}
+					}, this);
+					if (nextStructure) {
+						nextStructure.element.focus();
+						return;
+					} else {
+						list = structure.parentList;
+						structure = null;
+					}
+				} else {
+					var found = false;
+					var nextList;
+					JW.some(list.parentStructure.lists.plainChildren, function(child) {
+						if (found) {
+							nextList = child;
+							return true;
+						}
+						if (child === list) {
+							found = true;
+						}
+					}, this);
+					if (nextList) {
+						nextList.addElement.focus();
+						return;
+					} else {
+						structure = list.parentStructure;
+						list = null;
+					}
+				}
+			}
 		}
 		var found = false;
 		var nextElement;
@@ -163,6 +224,7 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		}
 	},
 	
+	// TODO: focus on mousedown instead of click (typical HTML inputs do so, and it will prevent some unexpected bugs)
 	_onBodyMouseDown: function(event) {
 		if (this._activateMouseDown) {
 			this._activateMouseDown = false;

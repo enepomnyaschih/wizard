@@ -5,10 +5,14 @@
 	wizard.view.Editor editor;
 	wizard.view.editor.IListCollection collection;
 	Subclass<wizard.view.editor.Element> provider;
+	wizard.view.editor.Structure parentStructure;
 	
 	Optional
 	String dataField;
 	Object extraCfg;
+	
+	Fields
+	wizard.view.editor.ButtonElement addElement;
 	*/
 	
 	childBox  : "items",
@@ -18,8 +22,15 @@
 		this._super();
 		this.titleEl.text(this.title);
 		
+		this.addElement = new wizard.view.editor.ButtonElement({
+			editor         : this.editor,
+			parentList     : this,
+			renderParent   : this,
+			renderPosition : "add"
+		});
+		
 		var collection = this.collection;
-		this.addEl.click(function() {
+		this.addElement.el.click(function() {
 			collection.createItem(0);
 		});
 	},
@@ -27,6 +38,7 @@
 	creator: function(data) {
 		return new wizard.view.editor.ListItem({
 			element    : this._createElement(data),
+			parentList : this,
 			collection : this.collection
 		});
 	},

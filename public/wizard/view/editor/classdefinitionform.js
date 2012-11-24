@@ -30,7 +30,7 @@
 			renderParent   : this,
 			renderPosition : "pack"
 		}));
-		if (kind.extendz) {
+		/*if (kind.extendz) {
 			elements.push(new wizard.view.editor.ClassPickerElement({
 				editor         : this.editor,
 				applier        : this._applyExtends,
@@ -41,7 +41,7 @@
 		} else {
 			this.removeEl("extends");
 			this.removeEl("extends-box");
-		}
+		}*/
 		return elements;
 	},
 	

@@ -1,8 +1,14 @@
-﻿wizard.view.editor.FormElement = wizard.view.editor.ContainerElement.extend({
+﻿wizard.view.editor.ButtonElement = wizard.view.editor.Element.extend({
 	/*
 	Fields
 	Element dummyInputEl;
 	*/
+	
+	render: function() {
+		this._super();
+		this.el.mousedown(JW.Function.inScope(this._preventMouseDownHandler, this));
+		this.el.click(JW.Function.inScope(this._blockClickHandler, this));
+	},
 	
 	destroyComponent: function() {
 		if (this.dummyInputEl) {

@@ -38,6 +38,8 @@
 		"wizard/view/editor/styles.css",
 		"wizard/view/editor/base/element.js",
 		"wizard/view/editor/base/element.jw.html : wizard.view.editor.Element",
+		"wizard/view/editor/base/buttonelement.js",
+		"wizard/view/editor/base/buttonelement.jw.html : wizard.view.editor.ButtonElement",
 		"wizard/view/editor/base/containerelement.js",
 		"wizard/view/editor/base/dropdown.js",
 		"wizard/view/editor/base/dropdown/main.jw.html : wizard.view.editor.Dropdown",

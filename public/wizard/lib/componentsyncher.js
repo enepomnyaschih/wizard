@@ -1,21 +1,21 @@
 wizard.lib.ComponentSyncher = JW.Syncher.extend({
 	/*
 	Required
-	JW.UI.Component scope;
+	JW.UI.Component target;
 	*/
 	
 	_inserter: function(item, index)
 	{
-		this.scope.addChild(item, index);
+		this.target.addChild(item, index);
 	},
 	
 	_remover: function(index)
 	{
-		this.scope.removeChild(index);
+		this.target.removeChild(index);
 	},
 	
 	_clearer: function()
 	{
-		this.scope.removeChildren();
+		this.target.removeChildren();
 	}
 });

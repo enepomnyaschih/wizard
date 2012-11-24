@@ -18,6 +18,11 @@ div.wizard-editor-plus {
 div.wizard-editor-minus {
 	background-image: url(images/minus.png);
 }
+.wizard-editor-button.wizard-focused {
+	background-position: -1px;
+	border: 1px solid blue;
+	border-radius: 2px;
+}
 .wizard-editor-element.wizard-collapsed {
 	color: blue;
 }

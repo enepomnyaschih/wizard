@@ -39,7 +39,7 @@
 		this.dropdown.el.offset(offset);
 		this.dropdown.el.click(JW.Function.inScope(this._blockClickHandler, this));
 		this.dropdown.bind("submit", this._onDropdownSubmit, this);
-		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
+		this.dropdown.filterEl.keydown(JW.Function.inScope(this._onDropdownKeyDown, this));
 	},
 	
 	_doneDropdown: function() {
@@ -56,10 +56,13 @@
 	
 	_onDropdownKeyDown: function(event) {
 		switch (event.which) {
-			case 13: this._submit(this.dropdown.getSelectedOption()); break;
-			default: return;
+			case 9:
+				event.preventDefault();
+				this.editor.focusNext(this);
+				break;
+			default:
+				return;
 		}
-		event.preventDefault();
 	},
 	
 	_submit: function(option) {
