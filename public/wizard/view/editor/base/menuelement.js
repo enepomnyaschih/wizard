@@ -37,6 +37,7 @@
 		var offset = this.el.offset();
 		offset.top += this.el.outerHeight() + 3;
 		this.dropdown.el.offset(offset);
+		this.dropdown.el.click(JW.Function.inScope(this._blockClickHandler, this));
 		this.dropdown.bind("submit", this._onDropdownSubmit, this);
 		this.dropdown.filterEl.keydown(JW.Function(this._onDropdownKeyDown, this));
 	},

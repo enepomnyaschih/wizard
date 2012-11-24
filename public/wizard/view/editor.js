@@ -85,6 +85,17 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		}, 1);
 	},
 	
+	skipClickFocus: function() {
+		if (this._skipClickFocus) {
+			return;
+		}
+		this._skipClickFocus = true;
+		var self = this;
+		setTimeout(function() {
+			self._skipClickFocus = false;
+		}, 1);
+	},
+	
 	_getExpandingBranch: function(element) {
 		var branch = [];
 		if (element.expanded) {

@@ -46,6 +46,7 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	},
 	
 	focus: function() {
+		this.editor.skipClickFocus();
 		this.editor.issueFocus(this);
 	},
 	
@@ -88,12 +89,11 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 		}
 		if (event.ctrlKey || !this.parentElement || this.parentElement.expanded) {
 			this.focus();
-			this.editor._skipClickFocus = true;
 		}
 	},
 	
 	_blockClickHandler: function(event) {
-		this.editor._skipClickFocus = true;
+		this.editor.skipClickFocus();
 	}
 });
 

@@ -30,7 +30,6 @@
 	
 	afterAppend: function() {
 		this._super();
-		this.editor._skipClickFocus = true;
 		this.element.focus();
 	},
 	
