@@ -17,16 +17,27 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 	Fields
 	wizard.view.editor.Structure root;
 	wizard.view.editor.Element focusedElement;
+	Function _bodyClickHandler;
+	Boolean _skipClickFocus;
 	*/
+	
+	_skipClickFocus : false,
 	
 	destroy: function() {
 		this.blur();
+		if (this.root) {
+			JW.UI.bodyEl.unbind("click", this._bodyClickHandler);
+		}
 		this._super();
 	},
 	
 	setRoot: function(root) {
-		// assert !this.root;
+		if (this.root) {
+			throw new Error("wizard.view.Editor instance is already assigned to root structure");
+		}
 		this.root = root;
+		this._bodyClickHandler = JW.Function.inScope(this._onBodyClick, this);
+		JW.UI.bodyEl.bind("click", this._bodyClickHandler);
 	},
 	
 	onFocus: function(element) {
@@ -93,6 +104,14 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		while (element && (element !== rootElement)) {
 			element.setExpanded(false);
 			element = element.parentElement;
+		}
+	},
+	
+	_onBodyClick: function() {
+		if (this._skipClickFocus) {
+			this._skipClickFocus = false;
+		} else {
+			this.blur();
 		}
 	}
 });
