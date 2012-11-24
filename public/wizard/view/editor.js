@@ -34,9 +34,13 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 			this.focusedElement.onBlur();
 		}
 		var branch = this._getExpandingBranch(element);
-		var rootElement = branch[0] || element;
-		this._collapse(rootElement);
-		JW.eachByMethod(branch, "setExpanded", [ true ]);
+		if (branch[0]) {
+			this._collapse(branch[0].parentElement);
+			JW.eachByMethod(branch, "setExpanded", [ true ]);
+		} else {
+			// In this case, some expanded element is being focused
+			this._collapse(element);
+		}
 		this.focusedElement = element;
 	},
 	

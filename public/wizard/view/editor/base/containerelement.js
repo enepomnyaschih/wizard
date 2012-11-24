@@ -41,7 +41,7 @@
 			return;
 		}
 		this.form = this._createForm();
-		this.form.elements.every(function(element) {
+		this.form.elements.each(function(element) {
 			element.parentElement = this;
 		}, this);
 		this.addChild(this.form);
