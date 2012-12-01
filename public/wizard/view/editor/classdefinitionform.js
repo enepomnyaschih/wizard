@@ -74,7 +74,8 @@
 				editor     : this.editor,
 				collection : this.clazz.implementz,
 				provider   : wizard.view.editor.ClassPickerElement,
-				dataField  : "clazz"
+				dataField  : "clazz",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		if (kind.hasStaticElements) {
@@ -83,7 +84,8 @@
 				editor     : this.editor,
 				collection : this.clazz.staticFields,
 				provider   : wizard.view.editor.StaticFieldDefinitionElement,
-				dataField  : "field"
+				dataField  : "field",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		if (kind.hasDynamicElements) {
@@ -92,7 +94,8 @@
 				editor     : this.editor,
 				collection : this.clazz.fields,
 				provider   : wizard.view.editor.FieldDefinitionElement,
-				dataField  : "field"
+				dataField  : "field",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		if (kind.hasConstructors) {
@@ -101,7 +104,8 @@
 				editor     : this.editor,
 				collection : this.clazz.constructors,
 				provider   : wizard.view.editor.ConstructorDefinitionElement,
-				dataField  : "constructor"
+				dataField  : "constructor",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		if (kind.hasMethods) {
@@ -110,7 +114,8 @@
 				editor     : this.editor,
 				collection : this.clazz.methods,
 				provider   : wizard.view.editor.MethodDefinitionElement,
-				dataField  : "method"
+				dataField  : "method",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		if (kind.hasStaticElements) {
@@ -119,7 +124,8 @@
 				editor     : this.editor,
 				collection : this.clazz.staticMethods,
 				provider   : wizard.view.editor.StaticMethodDefinitionElement,
-				dataField  : "method"
+				dataField  : "method",
+				extraCfg   : { clazz : this.clazz }
 			}));
 		}
 		return lists;

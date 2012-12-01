@@ -71,6 +71,8 @@
 		"wizard/view/editor/constructordefinitionelement.js",
 		"wizard/view/editor/fielddefinitionelement.js",
 		"wizard/view/editor/genericdefinitionelement.js",
+		"wizard/view/editor/genericdefinitionform.js",
+		"wizard/view/editor/genericdefinitionform.jw.html : wizard.view.editor.GenericDefinitionForm",
 		"wizard/view/editor/methoddefinitionelement.js",
 		"wizard/view/editor/packpickerelement.js",
 		"wizard/view/editor/staticfielddefinitionelement.js",
