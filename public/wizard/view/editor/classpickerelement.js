@@ -13,7 +13,7 @@
 	_createForm: function() {
 		return new wizard.view.editor.Form({
 			editor : this.editor,
-			title  : this.value ? this.value.getFullName() : "(select)"
+			title  : this.value ? this.value.fullName : "(select)"
 		});
 	},
 	
@@ -24,24 +24,23 @@
 	
 	// override
 	_createOptions: function() {
-		var classes = this.editor.model.project.getAllClasses();
+		var classes = this.editor.model.project.allClasses.values.base;
 		if (this.filterer) {
-			classes = classes.filter(this.filterer, this.scope || this);
+			classes = JW.filter(classes, this.filterer, this.scope || this);
 		}
 		return JW.map(classes, this._createDropdownOption, this);
 	},
 	
 	// override
 	_getMenuValue: function() {
-		return this.value ? this.value.getFullName() : null;
+		return this.value ? this.value.fullName : null;
 	},
 	
 	_createDropdownOption: function(clazz) {
 		var self = this;
-		var fullName = clazz.getFullName();
 		return new wizard.view.editor.MenuOption({
-			label   : fullName,
-			value   : fullName,
+			label   : clazz.fullName,
+			value   : clazz.fullName,
 			applier : function() {
 				self.applier.call(self.scope || self, clazz);
 			}

@@ -1,0 +1,17 @@
+﻿Синхронизация
+
+Пусть проект A зависит от проекта B
+
+B.packs <= pack1
+  via B.packs.syncher:
+B.allPacks <= pack1
+  via dependency.packSyncher:
+A.allPacks <= pack1
+
+pack1.classes <= class1
+  via pack1.classSyncher:
+B.classes <= class1
+  via B.classes.syncher:
+B.allClasses <= class1
+  via dependency.classSyncher:
+A.allClasses <= class1

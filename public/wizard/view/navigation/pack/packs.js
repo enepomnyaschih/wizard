@@ -12,7 +12,7 @@
 		this._super();
 		
 		this.syncher = new JW.UI.Syncher({
-			collection : this.pack.packs,
+			collection : this.pack.packs.values,
 			provider   : wizard.view.navigation.Pack,
 			scope      : this,
 			dataField  : "module",

@@ -1,5 +1,9 @@
 ﻿wizard.view.editor.dropdown.Option = JW.UI.Component.extend({
 	/*
+	Events
+	selectedchange(JW.Event event, Boolean value);
+	availablechange(JW.Event event, Boolean value);
+	
 	Required
 	wizard.view.editor.MenuOption option;
 	
@@ -7,6 +11,9 @@
 	Boolean selected;
 	Boolean available;
 	*/
+	
+	selected  : false,
+	available : true,
 	
 	render: function() {
 		this._super();
@@ -20,5 +27,5 @@
 	}
 });
 
-wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "selected", false);
-wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "available", true);
+wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "selected");
+wizard.Util.addProperty(wizard.view.editor.dropdown.Option, Boolean, "available");

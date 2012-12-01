@@ -35,7 +35,9 @@
 	
 	// override
 	_createOptions: function() {
-		return JW.map(JW.getValuesArray(wizard.model.clazz.Kind.items), this._createDropdownOption, this);
+		var kinds = JW.getValuesArray(wizard.model.clazz.Kind.items);
+		kinds = JW.filterBy(kinds, "visible", true);
+		return JW.map(kinds, this._createDropdownOption, this);
 	},
 	
 	// override
@@ -52,5 +54,10 @@
 				self.clazz.setClassKind(kind);
 			}
 		});
+	},
+	
+	// override
+	_getFocusInElement: function() {
+		return this.form.nameElement;
 	}
 });

@@ -11,8 +11,6 @@
 	render: function() {
 		this._super();
 		
-		var Module = wizard.view.navigation.Module;
-		
 		this.rowEl.attr("wizardmodule", this.module.moduleKind.id);
 		
 		this._renderBody();

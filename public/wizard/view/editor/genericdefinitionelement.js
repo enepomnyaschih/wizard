@@ -1,2 +1,4 @@
-﻿wizard.view.editor.GenericDefinitionElement = wizard.view.editor.Element.extend({
+﻿wizard.view.editor.GenericDefinitionElement = wizard.view.editor.FormElement.extend({
+	/*
+	*/
 });

@@ -32,7 +32,6 @@ JW.Syncher = JW.Config.extend({
     
     snapshot    : null,     // [readonly] Array of Submodel, last collection snapshot
     items       : null,     // [readonly] Array of Subcontroller
-    itemMap     : null,     // [readonly] Map from String to Subcontroller
     
     init: function(config)
     {
@@ -40,7 +39,6 @@ JW.Syncher = JW.Config.extend({
         
         this.snapshot = [];
         this.items = [];
-        this.itemMap = {};
         
         this.collection = JW.Collection.create(this.collection);
         
@@ -111,9 +109,6 @@ JW.Syncher = JW.Config.extend({
         
         this.snapshot.splice(index, 0, data);
         this.items.splice(index, 0, item);
-        
-        if (JW.isSet(this.indexer))
-            this.itemMap[this._indexer(data)] = item;
     },
     
     _onRemove: function(event, index, data)
@@ -124,9 +119,6 @@ JW.Syncher = JW.Config.extend({
         
         this.snapshot.splice(index, 1);
         this.items.splice(index, 1);
-        
-        if (JW.isSet(this.indexer))
-            delete this.itemMap[this._indexer(data)];
     },
     
     _onReplace: function(event, index, oldData, newData)
@@ -140,12 +132,6 @@ JW.Syncher = JW.Config.extend({
         
         this.snapshot[index] = newData;
         this.items[index] = newItem;
-        
-        if (JW.isSet(this.indexer))
-        {
-            delete this.itemMap[this._indexer(oldData)];
-            this.itemMap[this._indexer(newData)] = newItem;
-        }
     },
     
     _onMove: function(event, fromIndex, toIndex, data)
@@ -173,6 +159,13 @@ JW.Syncher = JW.Config.extend({
         
         this.snapshot = [];
         this.items = [];
+		
+		var itemMap = {};
+		if (this.indexer) {
+			for (var i = 0; i < snapshot.length; ++i) {
+				itemMap[this._indexer(snapshot[i])] = items[i];
+			}
+		}
         
         this._clearer();
         
@@ -184,7 +177,7 @@ JW.Syncher = JW.Config.extend({
             }
             else if (JW.isSet(this.indexer))
             {
-                item = this.itemMap[this._indexer(data)];
+                item = itemMap[this._indexer(data)];
             }
             else
             {

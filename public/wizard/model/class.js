@@ -2,14 +2,26 @@
 	id : "class"
 });
 
+/*
+interface wizard.model.IClassConfig {
+	Optional
+	String name; // auto-generated if missing
+	wizard.model.clazz.Kind classKind;
+	wizard.model.Class extendz; // default value is saved in wizard.Model field
+}
+*/
+
 wizard.model.Class = wizard.model.Module.extend({
 	/*
+	Event
+	classkindchange(JW.Event event, wized.model.clazz.Kind value);
+	
 	Optional
 	wizard.model.clazz.Kind classKind;
+	wizard.model.Class extendz; // can be null for inheritance root only
 	
 	Fields
-	JW.Collection<wizard.model.clazz.GenericClass> genericClasses;
-	wizard.model.Class extendz;
+	wizard.model.clazz.Generics generics;
 	JW.Collection<wizard.model.clazz.Interface> implementz;
 	JW.Collection<wizard.model.clazz.StaticField> staticFields;
 	JW.Collection<wizard.model.clazz.Field> fields;
@@ -20,9 +32,16 @@ wizard.model.Class = wizard.model.Module.extend({
 	
 	moduleKind : wizard.model.module.Kind["class"],
 	
-	getFullName: function() {
-		return !this.parent.parent ? this.name :
-		       (this.parent.getFullName() + "." + this.name);
+	init: function(config) {
+		this._super(config);
+		this.generics = new wizard.model.clazz.Generics(this);
+		this.implementz = new JW.Collection();
+		this.staticFields = new JW.Collection();
+		this.fields = new JW.Collection();
+		this.constructors = new JW.Collection();
+		this.methods = new JW.Collection();
+		this.staticMethods = new JW.Collection();
+		this.updateNames();
 	},
 	
 	createModuleView: function(model) {
@@ -30,50 +49,9 @@ wizard.model.Class = wizard.model.Module.extend({
 			model  : model,
 			module : this
 		});
-	},
-	
-	_updateClassKind: function() {
-		
 	}
 });
 
-wizard.Util.addProperty(wizard.model.Class, null, "classKind", null);
+wizard.Util.addProperty(wizard.model.Class, null, "classKind");
 
 wizard.model.clazz = {};
-
-wizard.model.clazz.Kind = JW.Config.extend({
-	/*
-	Fields
-	id                  : String
-	extendable          : Boolean
-	hasDynamicElements  : Boolean
-	hasStaticElements   : Boolean
-	hasAbstractMethods  : Boolean
-	
-	Autowired fields
-	extendz             : Boolean
-	implementz          : Boolean
-	instantiable        : Boolean
-	hasGenericClasses   : Boolean
-	hasConstructors     : Boolean
-	hasMethods          : Boolean
-	hasProtectedMethods : Boolean
-	hasFinalMethods     : Boolean
-	
-	Anonymous classes are final.
-	*/
-	
-	init: function(config) {
-		this._super(config);
-		this.extendz             = this.hasDynamicElements;
-		this.implementz          = this.hasDynamicElements || this.hasAbstractMethods;
-		this.instantiable        = this.hasDynamicElements || this.hasAbstractMethods;
-		this.hasGenericClasses   = this.hasDynamicElements || this.hasAbstractMethods;
-		this.hasConstructors     = this.hasDynamicElements;
-		this.hasMethods          = this.hasDynamicElements || this.hasAbstractMethods;
-		this.hasProtectedMethods = this.hasDynamicElements;
-		this.hasFinalMethods     = this.hasDynamicElements && this.extendable; // if not extendable, then all methods are final, in fact
-	}
-});
-
-wizard.model.clazz.Kind.items = {};

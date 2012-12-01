@@ -2,6 +2,9 @@
 	/*
 	Required
 	wizard.model.Class clazz;
+	
+	Fields
+	wizard.view.editor.TextElement nameElement;
 	*/
 	
 	render: function() {
@@ -13,15 +16,6 @@
 	_createElements: function() {
 		var kind = this.clazz.classKind;
 		var elements = [];
-		elements.push(new wizard.view.editor.TextElement({
-			editor         : this.editor,
-			value          : this.clazz.name,
-			validator      : this._validateName,
-			applier        : this._applyName,
-			scope          : this,
-			renderParent   : this,
-			renderPosition : "name"
-		}));
 		elements.push(new wizard.view.editor.PackPickerElement({
 			editor         : this.editor,
 			applier        : this._applyPack,
@@ -30,11 +24,22 @@
 			renderParent   : this,
 			renderPosition : "pack"
 		}));
+		this.nameElement = new wizard.view.editor.TextElement({
+			editor         : this.editor,
+			value          : this.clazz.name,
+			validator      : this._validateName,
+			applier        : this._applyName,
+			scope          : this,
+			renderParent   : this,
+			renderPosition : "name"
+		});
+		elements.push(this.nameElement);
 		if (kind.extendz) {
 			elements.push(new wizard.view.editor.ClassPickerElement({
 				editor         : this.editor,
 				applier        : this._applyExtends,
 				value          : this.clazz.extendz,
+				filterer       : this._filterExtends,
 				scope          : this,
 				renderParent   : this,
 				renderPosition : "extends"
@@ -54,11 +59,11 @@
 			editor : this.editor,
 			clazz  : this.clazz
 		};
-		if (kind.hasGenericClasses) {
+		if (kind.hasGenerics) {
 			lists.push(new wizard.view.editor.List({
 				title      : "generic classes",
 				editor     : this.editor,
-				collection : this.clazz.genericClasses,
+				collection : this.clazz.generics,
 				provider   : wizard.view.editor.GenericDefinitionElement,
 				dataField  : "generic"
 			}));
@@ -124,10 +129,8 @@
 		if (!wizard.view.editor.ClassDefinitionForm.nameRegex.test(name)) {
 			return "Invalid class name. Must contain liters and numbers only, must start from higher case liter.";
 		}
-		var isFree = this.clazz.parent.classes.every(function(sibling) {
-			return (sibling === this.clazz) || (sibling.name !== name);
-		}, this);
-		if (!isFree) {
+		var sibling = this.clazz.parent.classes.get(name);
+		if (sibling && (sibling !== this.clazz)) {
 			return "Class with such name exists already.";
 		}
 	},
@@ -142,6 +145,10 @@
 		}
 		this.clazz.parent.classes.removeItem(this);
 		pack.classes.addItem(this);
+	},
+	
+	_filterExtends: function(clazz) {
+		return clazz.classKind && clazz.classKind.extendable;
 	},
 	
 	_applyExtends: function(clazz) {

@@ -11,6 +11,9 @@ interface IFocusable extends IObservable {
 
 wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	/*
+	Events
+	expandedchange(JW.Event event, Boolean value);
+	
 	Required
 	wizard.view.Editor editor;
 	
@@ -26,7 +29,8 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	JW.Collection<wizard.view.editor.List> lists;
 	*/
 	
-	focused : false,
+	focused  : false,
+	expanded : false,
 	
 	render: function() {
 		this._super();
@@ -111,4 +115,4 @@ wizard.view.editor.Element = JW.UI.Component.extend({ // implements IFocusable
 	}
 });
 
-wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "expanded", false);
+wizard.Util.addProperty(wizard.view.editor.Element, Boolean, "expanded");

@@ -4,15 +4,25 @@
 	moduleselect(JW.Event event, wizard.model.Module module)
 	
 	Fields
-	project        : wizard.model.Project
-	selectedModule : wizard.model.Module
+	wizard.js.Lang langProject;
+	wizard.model.Project project;
+	wizard.model.Class defaultExtends;
 	*/
 	
 	selectedModule : null,
 	
 	init: function(config) {
 		this._super(config);
-		this.project = new wizard.model.Project();
+		this.langProject = new wizard.js.Lang({
+			model : this
+		});
+		this.defaultExtends = this.langProject.classes.get("Object");
+		this.project = new wizard.model.Project({
+			model    : this,
+			id       : "myproject",
+			rootName : "com.myproject"
+		});
+		this.project.dependencies.addItem(this.langProject);
 	},
 	
 	selectModule: function(module) {

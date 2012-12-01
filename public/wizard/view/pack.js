@@ -48,11 +48,11 @@
 	},
 	
 	_onNewPackClick: function() {
-		this.model.selectModule(this.module.newPack());
+		this.model.selectModule(this.module.addPack());
 	},
 	
 	_onNewClassClick: function() {
-		this.model.selectModule(this.module.newClass());
+		this.model.selectModule(this.module.addClass());
 	},
 	
 	_onDeleteClick: function() {
@@ -63,10 +63,8 @@
 		if (!wizard.view.Pack.nameRegex.test(name)) {
 			return "Invalid package name. Must contain lower case liters and numbers only, must start from liter.";
 		}
-		var isFree = this.module.parent.packs.every(function(sibling) {
-			return (sibling === this.module) || (sibling.name !== name);
-		}, this);
-		if (!isFree) {
+		var sibling = this.module.parent.packs.get(name);
+		if (sibling && (sibling !== this.module)) {
 			return "Package with such name exists already.";
 		}
 	},

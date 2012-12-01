@@ -1,5 +1,8 @@
 ﻿wizard.view.navigation.Pack = wizard.view.navigation.Module.extend({
 	/*
+	Events
+	expandedchange(JW.Event event, Boolean value);
+	
 	Required options
 	wizard.model.Pack module
 	
@@ -14,13 +17,13 @@
 		this._super();
 		
 		this._updateEmpty();
-		this.module.packs.bind("lengthchange", this._updateEmpty, this);
-		this.module.classes.bind("lengthchange", this._updateEmpty, this);
+		this.module.packs.values.bind("lengthchange", this._updateEmpty, this);
+		this.module.classes.values.bind("lengthchange", this._updateEmpty, this);
 	},
 	
 	destroyComponent: function() {
-		this.module.packs.purge(this);
-		this.module.classes.purge(this);
+		this.module.packs.values.purge(this);
+		this.module.classes.values.purge(this);
 		
 		this._super();
 	},
@@ -49,7 +52,7 @@
 	},
 	
 	_getLabel: function() {
-		return this.module.getLabel();
+		return this.module.fullName;
 	},
 	
 	_onMouseDown: function(event) {
@@ -69,6 +72,6 @@
 	}
 });
 
-wizard.Util.addProperty(wizard.view.navigation.Pack, Boolean, "expanded", false, "_updateExpanded");
+wizard.Util.addProperty(wizard.view.navigation.Pack, Boolean, "expanded");
 
 wizard.view.navigation.pack = {};

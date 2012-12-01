@@ -24,7 +24,7 @@
 	},
 	
 	focusIn: function() {
-		var element = this.form.elements.getItemAt(0);
+		var element = this._getFocusInElement();
 		if (element) {
 			element.focus();
 		} else {
@@ -59,5 +59,9 @@
 		this.lists.clear();
 		this.form.destroy();
 		delete this.form;
+	},
+	
+	_getFocusInElement: function() {
+		return this.form.elements.getItemAt(0);
 	}
 });
