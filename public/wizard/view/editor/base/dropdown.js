@@ -23,7 +23,7 @@
 		this.filterChangeListener = new wizard.lib.TextChangeListener({
 			el : this.filterEl
 		});
-		this.filterChangeListener.bind("change", this._onFilterChange, this);
+		this.filterChangeListener.bind("change", this._updateAvailableOptions, this);
 		this.filterEl.keydown(JW.Function.inScope(this._onFilterKeyDown, this));
 		this.syncher = new JW.UI.Syncher({
 			collection : this.options,
@@ -31,7 +31,7 @@
 			scope      : this
 		});
 		this._initSelectedIndex();
-		this._selectNext();
+		this._updateAvailableOptions();
 	},
 	
 	destroyComponent: function() {
@@ -42,6 +42,10 @@
 	
 	getSelectedOption: function() {
 		return this.options[this.selectedIndex];
+	},
+	
+	getSelectedOptionView: function() {
+		return this.plainChildren[this.selectedIndex];
 	},
 	
 	_createOptionView: function(option) {
@@ -55,17 +59,18 @@
 		return optionView;
 	},
 	
-	_onFilterChange: function(event, value) {
+	_updateAvailableOptions: function() {
 		var someAvailable = false;
 		JW.each(this.plainChildren, function(optionView) {
-			var available = this._isAvailable(optionView.option.label, value);
+			var available = this._isAvailable(optionView.option.label, this.filterEl.val());
 			optionView.setAvailable(available);
 			someAvailable = someAvailable || available;
 		}, this);
 		if (someAvailable) {
 			var option = this.getSelectedOption();
-			if (!option || !option.available) {
-				this._selectNext();
+			var optionView = this.getSelectedOptionView();
+			if (!option || !optionView.available) {
+				this._selectNext() || this._selectPrev() || this._setSelectedIndex(-1);
 			}
 		} else {
 			this._setSelectedIndex(-1);
@@ -112,22 +117,23 @@
 		for (var index = this.selectedIndex + 1; index < this.plainChildren.length; ++index) {
 			if (this.plainChildren[index].available) {
 				this._setSelectedIndex(index);
-				return;
+				return true;
 			}
 		}
+		return false;
 	},
 	
 	_selectPrev: function() {
 		if (this.selectedIndex === -1) {
-			this._selectNext();
-			return;
+			return this._selectNext();
 		}
 		for (var index = this.selectedIndex - 1; index >= 0; --index) {
 			if (this.plainChildren[index].available) {
 				this._setSelectedIndex(index);
-				return;
+				return true;
 			}
 		}
+		return false;
 	},
 	
 	_setSelectedIndex: function(value) {

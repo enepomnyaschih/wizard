@@ -20,10 +20,15 @@
 		this.el.addClass("wizard-editor-dropdown-option");
 		this.el.text(this.option.label);
 		this._updateSelected();
+		this._updateAvailable();
 	},
 	
 	_updateSelected: function() {
 		this.el.toggleClass("wizard-selected", this.selected);
+	},
+	
+	_updateAvailable: function() {
+		this.el.css("display", this.available ? "" : "none");
 	}
 });
 

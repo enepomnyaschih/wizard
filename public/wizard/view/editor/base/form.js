@@ -5,6 +5,7 @@
 	
 	Optional
 	String title;
+	String tooltip;
 	
 	Fields
 	JW.Collection<wizard.view.editor.Element> elements;
@@ -20,6 +21,9 @@
 		this.lists = new JW.Collection(this._createLists());
 		if (this.title) {
 			this.el.text(this.title);
+		}
+		if (this.tooltip) {
+			this.el.attr("title", this.tooltip);
 		}
 	},
 	

@@ -29,7 +29,7 @@
 		}
 		var options = this._createOptions();
 		var value = this._getMenuValue();
-		var index = JW.findBy(options, value);
+		var index = JW.findBy(options, "value", value);
 		this.dropdown = new wizard.view.editor.Dropdown({
 			options       : options,
 			selectedIndex : index

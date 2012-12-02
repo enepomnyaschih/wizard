@@ -9,8 +9,9 @@
 	_createForm: function() {
 		var value = this._getValue();
 		return new wizard.view.editor.Form({
-			editor : this.editor,
-			title  : value ? value.fullName : "(select)"
+			editor  : this.editor,
+			title   : value ? value.name : "(select)",
+			tooltip : value ? value.fullName : null
 		});
 	},
 	
