@@ -15,17 +15,25 @@
 		return this.map[name];
 	},
 	
-	createItem: function( // wizard.model.clazz.Generic
-		config) // wizard.model.clazz.IGenericConfig
+	addGeneric: function( // wizard.model.clazz.Generic
+		config, // wizard.model.clazz.IGenericConfig
+		index)
 	{
 		config = config || {};
+		if (!JW.isSet(index)) {
+			index = this.getLength();
+		}
 		var generic = new wizard.model.clazz.Generic({
 			clazz   : this.clazz,
 			name    : config.name || this.generateName(),
 			extendz : config.name || this.clazz.project.model.defaultExtends
 		});
-		this.addItem(generic);
+		this.addItemAt(generic, index);
 		return generic;
+	},
+	
+	createItem: function(index) {
+		this.addGeneric(null, index);
 	},
 	
 	generateName: function() {

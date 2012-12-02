@@ -37,6 +37,7 @@
 	
 	creator: function(data) {
 		return new wizard.view.editor.ListItem({
+			editor     : this.editor,
 			element    : this._createElement(data),
 			parentList : this,
 			collection : this.collection
