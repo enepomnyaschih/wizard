@@ -53,5 +53,6 @@ wizard.model.Class = wizard.model.Module.extend({
 });
 
 wizard.Util.addProperty(wizard.model.Class, null, "classKind");
+wizard.Util.addProperty(wizard.model.Class, null, "extendz");
 
 wizard.model.clazz = {};

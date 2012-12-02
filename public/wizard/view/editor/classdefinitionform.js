@@ -35,12 +35,9 @@
 		});
 		elements.push(this.nameElement);
 		if (kind.extendz) {
-			elements.push(new wizard.view.editor.ClassPickerElement({
+			elements.push(new wizard.view.editor.ClassExtendsElement({
 				editor         : this.editor,
-				applier        : this._applyExtends,
-				value          : this.clazz.extendz,
-				filterer       : this._filterExtends,
-				scope          : this,
+				clazz          : this.clazz,
 				renderParent   : this,
 				renderPosition : "extends"
 			}));
@@ -151,13 +148,6 @@
 		}
 		this.clazz.parent.classes.removeItem(this);
 		pack.classes.addItem(this);
-	},
-	
-	_filterExtends: function(clazz) {
-		return clazz.classKind && clazz.classKind.extendable;
-	},
-	
-	_applyExtends: function(clazz) {
 	}
 });
 

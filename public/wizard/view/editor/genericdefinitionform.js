@@ -16,12 +16,9 @@
 			renderParent   : this,
 			renderPosition : "name"
 		}));
-		elements.push(new wizard.view.editor.ClassPickerElement({
+		elements.push(new wizard.view.editor.GenericExtendsElement({
 			editor         : this.editor,
-			applier        : this._applyExtends,
-			value          : this.generic.extendz,
-			filterer       : this._filterExtends,
-			scope          : this,
+			generic        : this.generic,
 			renderParent   : this,
 			renderPosition : "extends"
 		}));
@@ -40,15 +37,6 @@
 	
 	_applyName: function(name) {
 		this.generic.setName(name);
-	},
-	
-	_filterExtends: function(clazz) {
-		return (clazz.classKind && clazz.classKind.extendable) ||
-		       (clazz.fullName === "com.wizard.js.lang.primitive");
-	},
-	
-	_applyExtends: function(clazz) {
-		this.generic.setExtendz(clazz);
 	}
 });
 

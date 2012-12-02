@@ -16,7 +16,7 @@
 		this.langProject = new wizard.js.Lang({
 			model : this
 		});
-		this.defaultExtends = this.langProject.classes.get("Object");
+		this.defaultExtends = this.langProject.classes.get("lang.Object");
 		this.project = new wizard.model.Project({
 			model    : this,
 			id       : "myproject",

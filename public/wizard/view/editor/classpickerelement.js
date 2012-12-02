@@ -1,39 +1,35 @@
 ﻿wizard.view.editor.ClassPickerElement = wizard.view.editor.MenuElement.extend({
 	/*
-	Required
-	void applier(wizard.model.Class value);
-	Object scope;
-	
-	Optional
-	wizard.model.Pack value;
-	Boolean filterer(wizard.model.Class value);
+	Abstract
+	wizard.model.Class _getValue();
+	void _applyValue(wizard.model.Class value);
 	*/
 	
 	// override
 	_createForm: function() {
+		var value = this._getValue();
 		return new wizard.view.editor.Form({
 			editor : this.editor,
-			title  : this.value ? this.value.fullName : "(select)"
+			title  : value ? value.fullName : "(select)"
 		});
 	},
 	
 	// override
 	_isValid: function() {
-		return JW.isSet(this.value);
+		return JW.isSet(this._getValue());
 	},
 	
 	// override
 	_createOptions: function() {
 		var classes = this.editor.model.project.allClasses.values.base;
-		if (this.filterer) {
-			classes = JW.filter(classes, this.filterer, this.scope || this);
-		}
+		classes = JW.filter(classes, this._filterValue, this);
 		return JW.map(classes, this._createDropdownOption, this);
 	},
 	
 	// override
 	_getMenuValue: function() {
-		return this.value ? this.value.fullName : null;
+		var value = this._getValue();
+		return value ? value.fullName : null;
 	},
 	
 	_createDropdownOption: function(clazz) {
@@ -42,8 +38,19 @@
 			label   : clazz.fullName,
 			value   : clazz.fullName,
 			applier : function() {
-				self.applier.call(self.scope || self, clazz);
+				self._applyValue(clazz);
 			}
 		});
+	},
+	
+	_getValue: function() {
+		return null;
+	},
+	
+	_filterValue: function(clazz) {
+		return true;
+	},
+	
+	_applyValue: function(clazz) {
 	}
 });
