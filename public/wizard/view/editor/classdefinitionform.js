@@ -70,9 +70,8 @@
 				title      : "implements",
 				editor     : this.editor,
 				collection : this.clazz.implementz,
-				provider   : wizard.view.editor.ClassPickerElement,
-				dataField  : "clazz",
-				extraCfg   : { clazz : this.clazz }
+				provider   : wizard.view.editor.ClassImplementsElement,
+				dataField  : "implement"
 			}));
 		}
 		if (kind.hasStaticElements) {

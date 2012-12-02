@@ -8,73 +8,73 @@
 			name : "lang"
 		});
 		langPack.addClass({
-			name      : "primitive",
+			name      : "any",
 			classKind : wizard.model.clazz.Kind.items["primitive"]
 		});
 		langPack.addClass({
 			name      : "void",
 			classKind : wizard.model.clazz.Kind.items["primitive"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 		});
 		langPack.addClass({
 			name      : "number",
 			classKind : wizard.model.clazz.Kind.items["primitive"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 		});
 		langPack.addClass({
 			name      : "boolean",
 			classKind : wizard.model.clazz.Kind.items["primitive"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 		});
 		langPack.addClass({
 			name      : "string",
 			classKind : wizard.model.clazz.Kind.items["primitive"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 		});
 		langPack.addClass({
 			name      : "IObject",
 			classKind : wizard.model.clazz.Kind.items["interface"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 		});
 		langPack.addClass({
 			name      : "INumber",
 			classKind : wizard.model.clazz.Kind.items["interface"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 			// implementz IObject
 		});
 		langPack.addClass({
 			name      : "IBoolean",
 			classKind : wizard.model.clazz.Kind.items["interface"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 			// implementz IObject
 		});
 		langPack.addClass({
 			name      : "IString",
 			classKind : wizard.model.clazz.Kind.items["interface"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 			// implementz IObject
 		});
 		langPack.addClass({
 			name      : "Object",
 			classKind : wizard.model.clazz.Kind.items["abstract"],
-			extendz   : langPack.classes.get("primitive")
+			extendz   : langPack.classes.get("any")
 			// implementz IObject
 		});
 		langPack.addClass({
 			name      : "Number",
-			classKind : wizard.model.clazz.Kind.items["regular"],
+			classKind : wizard.model.clazz.Kind.items["final"],
 			extendz   : langPack.classes.get("Object")
 			// implementz INumber
 		});
 		langPack.addClass({
 			name      : "Boolean",
-			classKind : wizard.model.clazz.Kind.items["regular"],
+			classKind : wizard.model.clazz.Kind.items["final"],
 			extendz   : langPack.classes.get("Object")
 			// implementz IBoolean
 		});
 		langPack.addClass({
 			name      : "String",
-			classKind : wizard.model.clazz.Kind.items["regular"],
+			classKind : wizard.model.clazz.Kind.items["final"],
 			extendz   : langPack.classes.get("Object")
 			// implementz IString
 		});

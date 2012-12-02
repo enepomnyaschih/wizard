@@ -24,7 +24,7 @@
 	// override
 	_filterValue: function(clazz) {
 		return (clazz.classKind && clazz.classKind.extendable) ||
-		       (clazz.fullName === "com.wizard.js.lang.primitive");
+		       (clazz.fullName === "com.wizard.js.lang.any");
 	},
 	
 	// override

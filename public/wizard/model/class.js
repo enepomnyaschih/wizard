@@ -22,7 +22,7 @@ wizard.model.Class = wizard.model.Module.extend({
 	
 	Fields
 	wizard.model.clazz.Generics generics;
-	JW.Collection<wizard.model.clazz.Interface> implementz;
+	wizard.model.clazz.Implements implementz;
 	JW.Collection<wizard.model.clazz.StaticField> staticFields;
 	JW.Collection<wizard.model.clazz.Field> fields;
 	JW.Collection<wizard.model.clazz.Constructor> constructors;
@@ -35,7 +35,7 @@ wizard.model.Class = wizard.model.Module.extend({
 	init: function(config) {
 		this._super(config);
 		this.generics = new wizard.model.clazz.Generics(this);
-		this.implementz = new JW.Collection();
+		this.implementz = new wizard.model.clazz.Implements(this);
 		this.staticFields = new JW.Collection();
 		this.fields = new JW.Collection();
 		this.constructors = new JW.Collection();
