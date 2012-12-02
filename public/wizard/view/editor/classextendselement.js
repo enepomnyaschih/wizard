@@ -23,7 +23,7 @@
 	
 	// override
 	_filterValue: function(clazz) {
-		return clazz.classKind && clazz.classKind.extendable;
+		return (clazz !== this.clazz) && clazz.classKind && clazz.classKind.extendable;
 	},
 	
 	// override
