@@ -78,7 +78,11 @@ wizard.view.Editor = JW.ObservableConfig.extend({
 		if (!element.parentElement) {
 			var structure, list;
 			if (element.parentStructure) {
-				if (element.parentStructure.addElement) {
+				if ((element === element.parentStructure.element) && element.parentStructure.remElement) {
+					element.parentStructure.remElement.focus();
+					return;
+				}
+				if (element === element.parentStructure.remElement) {
 					element.parentStructure.addElement.focus();
 					return;
 				}
