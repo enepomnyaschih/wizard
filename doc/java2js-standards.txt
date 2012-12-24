@@ -1,0 +1,46 @@
+﻿package com...;
+
+import com...Y;
+import com...Z;
+
+public/protected/private class X extends Y implements Z {
+	...
+}
+
+----
+
+jjs.defineClass(
+	"com...X",
+	"com...Y",
+	[
+		... // imports
+	],
+	function(X, Y, ... imports) {
+		... // static members
+		
+		return function(self, super_constructors) {
+			var ... // private members
+			
+			self.... = ... // public/protected members
+			
+			return [
+				... // constructors
+			];
+		};
+	}
+);
+
+
+
+private Type variable = value; -> var variable = value;
+protected Type variable = value; -> self._variable = value;
+public Type variable = value; -> self.variable = value;
+
+
+
+private Type method(Type arg1, Type arg2) { ... } -> function method(arg1, arg2) { ... }
+protected Type method(Type arg1, Type arg2) { ... } -> self._method = function(arg1, arg2) { ... }
+public Type method(Type arg1, Type arg2) { ... } -> self.method = function(arg1, arg2) { ... }
+
+
+

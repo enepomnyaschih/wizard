@@ -1,0 +1,96 @@
+﻿ExpressionElement : MenuElement
+	number constant (number)
+	string constant (string)
+	true (boolean)
+	false (boolean)
+	null (object)
+	this (current class initializer)
+	variable
+	call method
+	call superclass method
+	call static method
+	field
+	static field
+	new object
+	+ operator (number, string)
+	- operator (number)
+	* operator (number)
+	/ operator (number)
+	% operator (number)
+	& operator (number)
+	| operator (number)
+	^ operator (number)
+	<< operator (number)
+	>> operator (number)
+	<<< operator (number)
+	>>> operator (number)
+	== operator
+	!= operator
+	> operator (number, string)
+	< operator (number, string)
+	>= operator (number, string)
+	<= operator (number, string)
+	&& operator (boolean, object)
+	|| operator (boolean, object)
+	^^ operator (boolean)
+	- unary operator (number)
+	++ prefix operator (number)
+	-- prefix operator (number)
+	++ postfix operator (number)
+	-- postfix operator (number)
+	! operator (boolean)
+	?: operator (number)
+	?: operator (string)
+	?: operator (boolean)
+	?: operator (object)
+	convert string to number
+	convert number to string
+	convert boolean to string
+	convert object to string
+parameters:
+	return class initializer
+	not null
+
+CallMethodElement
+CallSuperclassMethodElement
+CallStaticMethodElement
+NewObjectElement
+	see actions.txt
+
+FieldElement : FormElement
+	[object].[field]
+	[object] : ExpressionElement (any class, not null)
+	[field] : FieldPickerElement (object required, public field of object's class)
+
+CallStaticMethodElement : FormElement
+	[class].[field]
+	[class] : ClassPickerElement (must have static fields)
+	[field] : StaticFieldPickerElement (class required)
+
+UnaryOperatorElement : FormElement
+	~operator~[operand]
+	[operand] : ExpressionElement (parameters depend on operator)
+
+BinaryOperatorElement : FormElement
+	[operand1] ~operator~ [operand2]
+	[operand1] : ExpressionElement (parameters depend on operator)
+	[operand2] : ExpressionElement (parameters depend on operator, return class initializer must be non-any or operand1 required)
+
+ConditionOperatorElement : FormElement
+	[if] ? [then] : [else]
+	[if] : ExpressionElement (boolean)
+	[then] : ExpressionElement (type equal to expression one)
+	[else] : ExpressionElement (type equal to expression one; if any, type is taken from "then")
+
+ConvertionOperatorElement : FormElement
+	~type~([operand])
+	[operand] : ExpressionElement (parameters depend on conversion type)
+
+See also:
+	NumberConstantElement
+	StringConstantElement
+	TrueElement
+	FalseElement
+	NullElement
+	ThisElement
+	VariableElement

@@ -1,0 +1,136 @@
+﻿ActionElement : MenuElement
+	assign
+	return (if method returns non-void)
+	call method
+	call superclass constructor (for constructors)
+	call superclass method (for constructors and non-static methods)
+	call static method
+	new object
+	if then else
+	switch (number)
+	switch (string)
+	loop
+	break (inside a loop)
+	continue (inside a loop)
+parameters:
+	sight area
+	break/continue allowed
+	is constructor
+	is non-static method
+	returned data type
+
+AssignElement : MenuElement
+	=
+	+=
+	-=
+	*=
+	/=
+	%=
+	&=
+	|=
+	^=
+	<<=
+	>>=
+	<<<=
+	>>>=
+	&&=
+	||=
+	^^=
+
+AssignFormElement : FormElement
+	[variable] ~operator~ [expression]
+	[variable] : VariableElement
+	[expression] : ExpressionElement (variable required, expected class is a subclass of variable class)
+
+ReturnElement : FormElement
+	return [expression]
+	[expression] : ExpressionElement (expected class is a subclass of current method return class)
+
+CallElement : FormElement
+	~callee~<generics>(arguments)
+	[generic] : ClassInitializerElement (callee required, must extend specified generic)
+	[argument] : ExpressionElement (generics required, must correspond method definition)
+
+CallMethodElement : CallElement
+	[object].[method]~parameters~
+	[object] : ExpressionElement (any class, not null)
+	[method] : MethodPickerElement (object required, public method of object's class)
+
+CallSuperclassConstructorElement : CallElement
+	super:[constructor]~parameters~
+	[constructor] : ConstructorPickerElement (superclass)
+
+CallSuperclassMethodElement : CallElement
+	super.[method]~parameters~
+	[method] : MethodPickerElement (public or protected method of superclass)
+
+CallStaticMethodElement : CallElement
+	[class].[method]~parameters~
+	[class] : ClassPickerElement (must have static methods)
+	[method] : StaticMethodPickerElement (class required)
+
+NewObjectElement : CallElement
+	new [class]:[constructor]~parameters~
+	[class] : ClassInitializerElement (must have constructors and be instantiable)
+	[constructor] : ConstructorPickerElement (class required)
+
+IfThenElseElement : FormElement
+	if [expression]
+		then [actions]
+		else [actions]
+	[expression] : ExpressionElement (boolean)
+	[action] : ActionElement (inherits current action's parameters)
+
+SwitchNumberElement : FormElement
+	switch number [expression]
+		cases [cases]
+	[expression] : ExpressionElement (number)
+	[case] : CaseNumberElement (inherits current action's parameters)
+
+CaseNumberElement : FormElement
+	case [value]
+		actions [actions]
+	[value] : NumberConstantElement
+	[action] : ActionElement (inherits case action's parameters)
+
+SwitchStringElement : FormElement
+	switch string [expression]
+		cases [cases]
+	[expression] : ExpressionElement (string)
+	[case] : CaseStringElement (inherits current action's parameters)
+
+CaseStringElement : FormElement
+	case [value]
+		actions [actions]
+	[value] : StringConstantElement
+	[action] : ActionElement (inherits case action's parameters)
+
+WhileLoopElement : FormElement
+	while [condition] ([position])
+		actions [actions]
+	[condition] : ExpressionElement (boolean)
+	[position] : LoopPositionElement
+	[action] : ActionElement (inherits current action's sight area, allows "break" and "continue")
+
+LoopPositionElement : MenuElement
+	pre-condition
+	post-condition
+
+BreakElement : FormElement
+	break
+
+ContinueElement : FormElement
+	continue
+
+
+
+See also:
+	FormElement
+	VariableElement
+	ExpressionElement
+	ClassPickerElement
+	ClassInitializerElement
+	ConstructorPickerElement
+	MethodPickerElement
+	NumberConstantElement
+	StringConstantElement
